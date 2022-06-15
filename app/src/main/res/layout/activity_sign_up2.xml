@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:orientation="vertical"
+    tools:context=".screen.SignUp2Activity">
+
+
+    <ImageView
+        android:id="@+id/btn_arrow_back"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        app:srcCompat="@drawable/ic_round_arrow_back_ios_new_24" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6">
+
+        <LinearLayout
+            android:id="@+id/stp_first_step_leaner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/enter_phone_or_email"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:layout_marginTop="16dp"
+
+                android:orientation="vertical"
+
+                >
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_TapLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabBackground="@drawable/tab_indecator_color"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabIndicatorColor="?attr/colorOnSecondary"
+                    app:tabRippleColor="@null"
+                    app:tabSelectedTextColor="?attr/colorOnSecondary"
+                    app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+                    app:tabTextColor="@color/text_skni_color">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email" />
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_email"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@drawable/edit_text_outlined"
+                    android:hint="@string/email"
+                    android:inputType="textWebEmailAddress"
+                    android:lines="1"
+                    android:maxLength="35"
+                    android:paddingHorizontal="8dp"
+                    android:textSize="15dp"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/lay_phone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginVertical="16dp"
+                    app:boxBackgroundColor="#0F959595"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#658A8989"
+                    app:boxStrokeWidth=".1dp"
+                    app:endIconDrawable="@drawable/ic_baseline_cancel_24"
+                    app:endIconMode="clear_text"
+                    app:expandedHintEnabled="false"
+                    app:hintTextColor="?attr/colorOnSecondary"
+                    app:prefixText="PS +970"
+                    app:prefixTextAppearance="@style/prefix"
+                    app:prefixTextColor="@color/facebookBackGroundColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_Phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:lines="1"
+                        android:maxLength="10"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/btn_login_enable_or_not"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/tv_withPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@string/youMay"
+                    android:textColor="@color/text_skni_color"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="32dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height=".6dp"
+                        android:layout_weight="1"
+                        android:background="@color/divider"
+                        app:cardCornerRadius="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="25dp"
+                        android:text="@string/or"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height=".6dp"
+                        android:layout_weight="1"
+                        android:background="@color/divider"
+                        app:cardCornerRadius="8dp" />
+
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:cardBackgroundColor="?attr/colorOnPrimary"
+                    app:cardCornerRadius="5dp"
+                    app:rippleColor="@color/white"
+
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/btn_loginWithFaceBook"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/border"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:src="@drawable/facebook" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:text="@string/cn_faceBook"
+                            android:textColor="?attr/colorOnSecondary"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/scend_step_lieanerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/addYourName"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/addYourNameDescribtion"
+                android:textColor="@color/text_skni_color"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_name"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/edit_text_outlined"
+                android:hint="@string/userName"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:maxLength="35"
+                android:paddingHorizontal="8dp"
+                android:textSize="15dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next_scand_Step"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_login_enable_or_not"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/theard_step_lieanerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/CratePAssword"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/CratePAsswordDescription"
+                android:textColor="@color/text_skni_color"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_password"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edit_text_outlined"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:maxLength="35"
+                android:paddingHorizontal="8dp"
+                android:textSize="15dp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/savePassword_Box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:buttonTint="@color/facebookBackGroundColor"
+                android:checked="true"
+                android:foregroundTint="#CF5D5D"
+                android:text="@string/savePassword" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next_therd_Step"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_login_enable_or_not"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/forth_step_lieanerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center|top"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/create_userName"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_17sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/create_userNameDescribtion"
+                android:textColor="@color/text_skni_color"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_userNameDescribtion"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/edit_text_outlined"
+                android:hint="@string/userName"
+                android:inputType="textPersonName"
+                android:lines="1"
+                android:maxLength="35"
+                android:paddingHorizontal="8dp"
+                android:textSize="15dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next_finalStep"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_login_enable_or_not"
+                android:text="@string/finish"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height=".4dp"
+            android:layout_gravity="top"
+            android:background="@color/divider"
+            app:cardCornerRadius="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alreadyHaveAccount"
+                android:textSize="12dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login_"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:background="@null"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/facebookBackGroundColor"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

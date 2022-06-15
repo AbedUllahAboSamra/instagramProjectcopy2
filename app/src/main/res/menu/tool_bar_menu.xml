@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/btn_add"
+        android:icon="@drawable/ic_outline_add_box_24"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/btn_chat"
+        android:icon="@drawable/ic_round_chat_24"
+        android:title=""
+        app:showAsAction="always" />
+
+</menu>

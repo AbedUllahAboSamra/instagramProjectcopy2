@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/btn_clickToOpenPersonProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_38sdp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/story_background_gradiant"
+            app:cardCornerRadius="5000dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="2dp"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
+                app:cardCornerRadius="5000dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="3dp"
+                    app:cardCornerRadius="5000dp">
+
+                    <ImageView
+                        android:id="@+id/userImageId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images">
+
+                    </ImageView>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Abed Ullah Abo "
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Abed Ullah Abo "
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <ImageButton
+            android:id="@+id/btn_more"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_more_horiz_24" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_ImageViewPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_250sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/images"
+        android:visibility="visible" />
+
+    <VideoView
+        android:id="@+id/img_VideoViewPost"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_280sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/images"
+        android:visibility="gone" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager_images"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:visibility="gone"
+
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:background="@null"
+            android:src="@drawable/ic_outline_favorite_border_24" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:background="@null"
+            android:src="@drawable/ic_outline_mode_comment_24" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_share_24" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_TablayoutWithViewPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:background="@null"
+            android:src="@drawable/ic_outline_save_border_24" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp">
+
+        <TextView
+            android:id="@+id/tv_PosterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="adsasd"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_PostText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="                adsaasd asd asd asd asd asd asd asd asd asd asd asd asd sd"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="@dimen/_12sdp"
+
+            />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_ViewNumOfComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="8dp"
+        android:text="View 1 Comment"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_timePostAgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="2 hours ago"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold" />
+</LinearLayout>

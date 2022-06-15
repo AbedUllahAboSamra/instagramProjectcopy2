@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Wolf  </string>
+    <string name="edit">Edit</string>
+    <string name="Log_into_another_account">Log into another account</string>
+    <string name="create_account">Create account</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="userName">User name</string>
+    <string name="email">Email</string>
+    <string name="editEmailLogin">Phone number, username or email</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword">Forget password</string>
+    <string name="login">Log in</string>
+    <string name="or">OR</string>
+    <string name="cn_faceBook">Continue with facebook</string>
+    <string name="dont_haveAccount">Don\'t have an account?</string>
+    <string name="Sign_Up">Sign up.</string>
+    <string name="Sign_Up_text">Sign up to see photos and videos from your friends.</string>
+    <string name="signUpBtn">Sign Up With Phone or Email</string>
+    <string name="alreadyHaveAccount">Already have an account?</string>
+    <string name="enter_phone_or_email">Enter Phone or Email</string>
+    <string name="addYourName">Add Your Name</string>
+    <string name="addYourNameDescribtion">Add your name so friends can find you.</string>
+    <string name="CratePAssword">Create a password</string>
+    <string name="CratePAsswordDescription">We can remember the password, so you won\'t need to enter it on your devices.</string>
+    <string name="phone">Phone</string>
+    <string name="next">Next</string>
+    <string name="youMay">You may receive SMS notification from us for security and login purposes.</string>
+    <string name="savePassword">Save Password</string>
+    <string name="facebook_app_id">1234</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+    <string name="create_userName">Create username</string>
+    <string name="finish">Finish</string>
+    <string name="create_userNameDescribtion">Pick a username for your new account. You can always change it later.</string>
+
+
+    <string name="Addyourbirthday">Add your birthday</string>
+    <string name="AddyourbirthdayDescribtion">This won\'t be part of your public profile.</string>
+    <string name="AddyourbirthdayWhy">Why do I need to provide my birthday?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screen.LoginWithEmailAndPassActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/pacifico"
+            android:text="Instagram"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="@dimen/_32sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            app:boxBackgroundColor="#0F959595"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#658A8989"
+            app:boxStrokeWidth=".1dp"
+            app:endIconDrawable="@drawable/ic_baseline_cancel_24"
+            app:endIconMode="clear_text"
+
+            app:hintTextColor="?attr/colorOnSecondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_emailOrNameOrPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/editEmailLogin"
+                android:inputType="textWebEmailAddress"
+                android:lines="1"
+                android:maxLength="35"
+                android:textSize="13dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            app:boxBackgroundColor="#0F959595"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#658A8989"
+            app:boxStrokeWidth=".2dp"
+            app:endIconDrawable="@drawable/password_toggle"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="?attr/colorOnSecondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:maxLength="35"
+                android:textSize="13dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_forgetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="16dp"
+            android:background="@null"
+            android:elevation="0dp"
+            android:paddingHorizontal="2dp"
+            android:text="@string/forgetPassword"
+            android:textAllCaps="false"
+            android:textColor="@color/facebookBackGroundColor"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_login_enable_or_not"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="32dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height=".6dp"
+                android:layout_weight="1"
+                android:background="@color/divider"
+                app:cardCornerRadius="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:text="@string/or"
+                android:textSize="14dp"
+                android:textStyle="bold"
+
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height=".6dp"
+                android:layout_weight="1"
+                android:background="@color/divider"
+                app:cardCornerRadius="8dp" />
+
+
+        </LinearLayout>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btn_loginWithFaceBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height=".4dp"
+            android:layout_gravity="top"
+            android:background="@color/divider"
+            app:cardCornerRadius="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dont_haveAccount"
+                android:textSize="12dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_create_account"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:background="@null"
+                android:text="@string/Sign_Up"
+                android:textAllCaps="false"
+                android:textColor="@color/facebookBackGroundColor"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
