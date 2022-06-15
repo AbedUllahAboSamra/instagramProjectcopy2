@@ -33,4 +33,11 @@
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    <style name="Theme.InstagramProject.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.InstagramProject.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.InstagramProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

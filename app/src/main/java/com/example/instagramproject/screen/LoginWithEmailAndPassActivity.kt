@@ -52,11 +52,9 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
             }
 
             override fun onCancel() {
-                Log.d("ASD", "facebook:onCancel")
             }
 
             override fun onError(error: FacebookException) {
-                Log.d("ASD", "facebook:onError", error)
             }
         })
 
@@ -98,6 +96,7 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
 
 //btn login clicked
         binding.btnLogin.setOnClickListener {

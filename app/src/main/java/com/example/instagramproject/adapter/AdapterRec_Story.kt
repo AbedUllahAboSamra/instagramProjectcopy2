@@ -8,7 +8,7 @@ import com.example.instagramproject.R
 import com.example.instagramproject.databinding.DesignStoryItemBinding
 import com.example.instagramproject.model.StoryModle
 
-class AdapterRec_Story(var context: Context, var arr: ArrayList<StoryModle>) :
+class AdapterRec_Story(var context: Context, var arr: ArrayList<String>) :
     RecyclerView.Adapter<AdapterRec_Story.myViewHolder>() {
 
     class myViewHolder(var binding: DesignStoryItemBinding) : RecyclerView.ViewHolder(binding.root)

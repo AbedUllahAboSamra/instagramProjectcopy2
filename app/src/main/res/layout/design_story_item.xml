@@ -5,8 +5,8 @@
     android:layout_height="wrap_content">
 
     <FrameLayout
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
         android:layout_marginHorizontal="8dp"
         android:background="@drawable/story_background_gradiant"
         app:cardCornerRadius="5000dp">
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="4dp"
+            android:layout_margin="3dp"
             app:cardBackgroundColor="?attr/colorOnPrimary"
             app:cardCornerRadius="5000dp">
 

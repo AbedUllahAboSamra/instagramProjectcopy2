@@ -19,8 +19,23 @@
         android:theme="@style/Theme.InstagramProject"
         tools:targetApi="31">
         <activity
-            android:name=".screen.ScandCreatePostActivity"
+            android:name=".screen.SplachActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".screen.TagPeopleActivity"
             android:exported="false" />
+        <activity
+            android:name=".screen.AddLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.ScandCreatePostActivity"
+            android:exported="true" />
         <activity
             android:name=".screen.SignUp2Activity"
             android:exported="true" />
@@ -50,13 +65,7 @@
             android:exported="true" />
         <activity
             android:name=".screen.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
