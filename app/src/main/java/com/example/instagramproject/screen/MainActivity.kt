@@ -2,6 +2,7 @@ package com.example.instagramproject.screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
@@ -19,11 +20,17 @@ class MainActivity : AppCompatActivity() {
     // :: :: ::
     lateinit var binding: ActivityMainBinding
 
+
+
     // :: :: ::
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+Log.e("ASD",SplachActivity.postsArray.toString())
+
         val arr = ArrayList<Fragment>()
         arr.add(MinsCameraFragment())
         arr.add(MainFragment())
@@ -31,7 +38,4 @@ class MainActivity : AppCompatActivity() {
         val adapter = PagerAdapter_ForMainActivity(supportFragmentManager, arr)
         binding.mainViewPager.adapter = adapter
     }
-
-
-
 }

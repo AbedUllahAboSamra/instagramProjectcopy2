@@ -17,7 +17,10 @@ class FirstCreatePostActivity : AppCompatActivity() {
     lateinit var binding: ActivityFirstCreatePostBinding
 
     var PICK_IMAGE_MULTIPLE = 125
-    var mArrayUri = ArrayList<Uri>()
+
+    companion object {
+        var mArrayUri = ArrayList<Uri>()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,10 +92,10 @@ class FirstCreatePostActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            startActivity(Intent(this,ScandCreatePostActivity::class.java))
+            startActivity(Intent(this, ScandCreatePostActivity::class.java))
         }
         binding.btnBack.setOnClickListener {
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
