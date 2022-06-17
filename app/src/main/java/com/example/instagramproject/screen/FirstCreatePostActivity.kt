@@ -83,7 +83,7 @@ class FirstCreatePostActivity : AppCompatActivity() {
             binding.btnNext.visibility = View.VISIBLE
             binding.vPagerView.visibility = View.VISIBLE
 
-            var adapter = adapterPagerFilesPick(this, mArrayUri)
+            var adapter = adapterPagerFilesPick( null,mArrayUri)
             binding.vPagerView.adapter = adapter
         } else {
             binding.vPagerView.visibility = View.GONE

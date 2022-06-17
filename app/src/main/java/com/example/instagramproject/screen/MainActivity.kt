@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
 
-
     // :: :: ::
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +28,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-Log.e("ASD",SplachActivity.postsArray.toString())
+        Log.e("ASD", SplachActivity.postsArray.toString())
 
         val arr = ArrayList<Fragment>()
         arr.add(MinsCameraFragment())
         arr.add(MainFragment())
         arr.add(ChatsFragment())
+
         val adapter = PagerAdapter_ForMainActivity(supportFragmentManager, arr)
         binding.mainViewPager.adapter = adapter
+        binding.mainViewPager.currentItem = 1
     }
 }

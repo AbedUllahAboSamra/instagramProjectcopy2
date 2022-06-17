@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.instagramproject.databinding.ActivitySignUp2Binding
 import com.example.instagramproject.model.CustomProgressDialog
+import com.example.instagramproject.model.UserModel
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -231,16 +232,26 @@ class SignUp2Activity : AppCompatActivity() {
                         map["email"] = email
                         map["password"] = passWord
                         map["userName"] = userName
-
+                        map["imageUrl"] = "http://www.gravatar.com/avatar/?d=mp"
                         FirebaseFirestore.getInstance().collection("users")
                             .document(user.user!!.uid)
                             .set(map)
                             .addOnSuccessListener {
+                                SplachActivity.currentUser= UserModel(uId=user.user!!.uid,
+                                    accountName = accountNAme,
+                                    email = email,
+                                    password =passWord,
+                                    userName = userName,
+                                    imageUrl = "http://www.gravatar.com/avatar/?d=mp"
+                                    )
+
+
                                 progressDialog.dialog.dismiss()
                                 startActivity(Intent(this, MainActivity::class.java))
                                 if (binding.savePasswordBox.isChecked) {
                                     val pref = getSharedPreferences("My", MODE_PRIVATE)
                                     val editor = pref.edit()
+                                    SplachActivity.uId = user.user!!.uid
                                     editor.putString("uId", user.user!!.uid)
                                     editor.apply()
                                 }

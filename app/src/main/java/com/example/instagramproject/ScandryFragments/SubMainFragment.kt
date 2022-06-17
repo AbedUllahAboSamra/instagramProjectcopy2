@@ -6,10 +6,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagramproject.R
+import com.example.instagramproject.adapter.AdapterRec_Posts
 import com.example.instagramproject.adapter.AdapterRec_Story
 import com.example.instagramproject.databinding.FragmentSubMainBinding
 import com.example.instagramproject.screen.FirstCreatePostActivity
 import com.example.instagramproject.screen.MainActivity
+import com.example.instagramproject.screen.SplachActivity
 
 class SubMainFragment : Fragment() {
 
@@ -33,9 +35,19 @@ class SubMainFragment : Fragment() {
         array.add("")
         array.add("")
         array.add("")
-        binding.recStoryItems.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        var storyAdapter = AdapterRec_Story(requireContext(),array)
-        binding.recStoryItems.adapter=storyAdapter
+
+        // story Recycle view Adapter
+        binding.recStoryItems.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        var storyAdapter = AdapterRec_Story(requireContext(), array)
+        binding.recStoryItems.adapter = storyAdapter
+
+        // posts Recycle view Adapter
+
+        var postsAdapter = AdapterRec_Posts(SplachActivity.postsArray)
+        binding.recPosts.layoutManager = LinearLayoutManager(requireContext())
+        binding.recPosts.adapter = postsAdapter
+
 
         return binding.root
     }
@@ -51,7 +63,6 @@ class SubMainFragment : Fragment() {
                 )
             )
         }
-
 
 
     }

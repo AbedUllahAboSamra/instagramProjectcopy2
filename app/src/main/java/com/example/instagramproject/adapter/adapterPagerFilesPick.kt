@@ -10,11 +10,17 @@ import android.widget.MediaController
 import androidx.core.net.toUri
 import androidx.viewpager.widget.PagerAdapter
 import com.example.instagramproject.databinding.DesignImageOrVedioBinding
+import com.squareup.picasso.Picasso
 
-class adapterPagerFilesPick(var context: Context, var arr: ArrayList<Uri>) : PagerAdapter() {
+class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: ArrayList<Uri>?) :
+    PagerAdapter() {
 
     override fun getCount(): Int {
-        return arr.size
+        if (arr != null) {
+            return arr!!.size
+        } else {
+            return arrayFromIInternt!!.size
+        }
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -29,27 +35,37 @@ class adapterPagerFilesPick(var context: Context, var arr: ArrayList<Uri>) : Pag
 
         var binding =
             DesignImageOrVedioBinding.inflate(LayoutInflater.from(container.context), null, false)
+        if (arr != null) {
+            if (arr!![position].toString().contains("video")) {
+                binding.imageView.visibility = View.GONE
+                binding.VideoView.visibility = View.VISIBLE
 
+                binding.VideoView.setVideoURI(arr!![position])
+                binding.VideoView.setMediaController(MediaController(container.context))
 
+            } else {
+                binding.VideoView.visibility = View.GONE
+                binding.imageView.visibility = View.VISIBLE
 
-        if (arr[position].toString().contains("video")) {
-            binding.imageView.visibility = View.GONE
-            binding.VideoView.visibility = View.VISIBLE
-
-            binding.VideoView.setVideoURI(arr[position])
-            binding.VideoView.setMediaController(MediaController(context))
+                binding.imageView.setImageURI(arr!![position])
+            }
 
         } else {
-            binding.VideoView.visibility=View.GONE
+            binding.VideoView.visibility = View.GONE
             binding.imageView.visibility = View.VISIBLE
 
-            binding.imageView.setImageURI(arr[position])
+            Picasso.with(container.context)
+                .load(arrayFromIInternt!![position])
+                .into(binding.imageView);
         }
+
+
         container.addView(binding.root)
         return binding.root
 
     }
-    fun notitydataSet(){
+
+    fun notitydataSet() {
         notifyDataSetChanged()
     }
 

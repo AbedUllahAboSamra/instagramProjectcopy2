@@ -10,6 +10,7 @@ import com.example.instagramproject.databinding.ActivitySplachBinding
 import com.example.instagramproject.model.CommentModel
 import com.example.instagramproject.model.LikeModel
 import com.example.instagramproject.model.PostModel
+import com.example.instagramproject.model.UserModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Comment
@@ -20,6 +21,7 @@ class SplachActivity : AppCompatActivity() {
     companion object {
         var uId = ""
         var postsArray = ArrayList<PostModel>()
+        var currentUser: UserModel? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +32,38 @@ class SplachActivity : AppCompatActivity() {
         uId = getSharedPreferences("My", MODE_PRIVATE).getString("uId", "").toString()
 
 
-            postsArray = getPosts()
+        postsArray = getPosts()
 
+        Handler().postDelayed({
+            if (uId.isEmpty()) {
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
+                FirebaseFirestore.getInstance().collection("users")
+                    .document(uId)
+                    .get().addOnSuccessListener { it ->
+
+                        currentUser = UserModel(
+                            uId = uId,
+                            userName = it.getString("userName").toString(),
+                            imageUrl = it.getString("imageUrl").toString(),
+                            accountName = it.getString("accountName").toString(),
+                            email = it.getString("email").toString(),
+                            password = it.getString("password").toString(),
+                        )
+                        startActivity(Intent(this, CommentActivity::class.java))
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                        finish()
+                    }
+
+
+            }
+
+
+        }, 3000)
 
     }
 
@@ -43,6 +75,7 @@ class SplachActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { items ->
                 for (i in items) {
+
                     var commentsArray = ArrayList<CommentModel>()
                     var postLikesArray = ArrayList<LikeModel>()
                     var tagPeopleIds = ArrayList<String>()
@@ -69,11 +102,10 @@ class SplachActivity : AppCompatActivity() {
                                         for (like in commentLikes) {
                                             var commentLike = LikeModel(
                                                 id = like.id,
-                                                likerImageUrl = like.getString("likerImageUrl")
-                                                    .toString(),
                                                 likerId = like.getString("likerId").toString(),
                                                 likeDate = like.getString("likeDate").toString(),
-                                                likerName = like.getString("likerName").toString(),
+                                                isLike = like.getBoolean("isLike")!!
+
                                             )
                                             commentLikesArray.add(commentLike)
                                         }
@@ -113,11 +145,9 @@ class SplachActivity : AppCompatActivity() {
 
                                 var likeitem = LikeModel(
                                     id = like.id,
-                                    likerImageUrl = like.getString("likerImageUrl")
-                                        .toString(),
                                     likerId = like.getString("likerId").toString(),
                                     likeDate = like.getString("likeDate").toString(),
-                                    likerName = like.getString("likerName").toString(),
+                                    isLike = like.getBoolean("isLike")!!
                                 )
                                 postLikesArray.add(likeitem)
 
@@ -185,18 +215,6 @@ class SplachActivity : AppCompatActivity() {
                     )
                     arr.add(postItem)
                 }
-
-                Handler().postDelayed({
-                    if (uId.isEmpty()) {
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        finish()
-                    } else {
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
-                    }
-
-
-                }, 3000)
                 Log.e("ASD", "get all sucsess Failure")
 
             }
@@ -206,4 +224,6 @@ class SplachActivity : AppCompatActivity() {
 
         return arr
     }
+
+
 }

@@ -9,13 +9,13 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_380sdp"
-        android:scaleType="fitXY"
+        android:layout_height="@dimen/_320sdp"
+        android:scaleType="centerCrop"
         android:visibility="visible" />
     <VideoView
         android:id="@+id/VideoView"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_380sdp"
+        android:layout_height="@dimen/_320sdp"
         />
 
 

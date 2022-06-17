@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramproject.databinding.ActivityLoginWithEmailAndPassBinding
 import com.example.instagramproject.model.CustomProgressDialog
+import com.example.instagramproject.model.UserModel
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -17,6 +18,7 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginWithEmailAndPassActivity : AppCompatActivity() {
     //
@@ -105,11 +107,23 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
             var password = binding.edtPassword.text.toString()
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener { it ->
-
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(SplachActivity.uId)
+                        .get().addOnSuccessListener { it ->
+                            SplachActivity.currentUser = UserModel(
+                                uId = SplachActivity.uId,
+                                userName = it.getString("userName").toString(),
+                                imageUrl = it.getString("imageUrl").toString(),
+                                accountName = it.getString("accountName").toString(),
+                                email = it.getString("email").toString(),
+                                password = it.getString("password").toString(),
+                            )
+                        }
 
                     var shared = getSharedPreferences("My", MODE_PRIVATE)
                     var editor = shared.edit()
                     editor.putString("uId", it.user!!.uid)
+                    SplachActivity.uId = it.user!!.uid
                     editor.apply()
                     if (it.user!!.uid == "") {
                         progressDialog.dialog.dismiss()

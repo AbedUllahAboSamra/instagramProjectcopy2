@@ -85,23 +85,17 @@ Log.e("ASD","postDelayed")
                                 var postMap = HashMap<String, Any>()
                                 postMap["posterId"] = SplachActivity.uId
                                 postMap["postText"] = binding.edtPostContent.text.toString()
-                                postMap["postDate"] = Date().date
+                                postMap["postDate"] = Date().date.toString()
                                 postMap["posterImageUrl"] =
                                     "https://i.picsum.photos/id/782/200/300.jpg?grayscale&hmac=pVq8q45ZnyWOPDP3vRLdOwswl3w3koNTFoGtUI8GVjE"
                                 postMap["posterName"] = "Abod Ayman0"
-                                postMap["postPossition"] = Date().date
+                                postMap["postPossition"] = Date().date.toString()
 
 
                                 FirebaseFirestore.getInstance().collection("posts")
                                     .add(postMap)
                                     .addOnSuccessListener { it ->
 
-//                            FirebaseFirestore.getInstance().collection("posts")
-//                                .document(it.id)
-//                                .collection("peopleIdTags")
-//                                .add(mapOf("ta" to "asd"))
-//                                .addOnSuccessListener {
-//                                }
                                         var uirMap = HashMap<String, String>()
                                         for (i in 0 until arrayUrlPostImages.size) {
                                             uirMap[i.toString()] = arrayUrlPostImages[i]
