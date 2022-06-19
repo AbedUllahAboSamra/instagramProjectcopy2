@@ -96,7 +96,7 @@ class SplachActivity : AppCompatActivity() {
                                     .document(i.id)
                                     .collection("comments")
                                     .document(comment.id)
-                                    .collection("commentLikes")
+                                    .collection("likes")
                                     .get()
                                     .addOnSuccessListener { commentLikes ->
                                         for (like in commentLikes) {
@@ -104,7 +104,8 @@ class SplachActivity : AppCompatActivity() {
                                                 id = like.id,
                                                 likerId = like.getString("likerId").toString(),
                                                 likeDate = like.getString("likeDate").toString(),
-                                                isLike = like.getBoolean("isLike")!!
+                                                isLike = like.getBoolean("isLike")!!,
+                                                comment.id
 
                                             )
                                             commentLikesArray.add(commentLike)
@@ -136,7 +137,8 @@ class SplachActivity : AppCompatActivity() {
 //get all Likes
 
 
-                    FirebaseFirestore.getInstance().collection("posts")
+                    FirebaseFirestore.getInstance()
+                        .collection("posts")
                         .document(i.id)
                         .collection("likes")
                         .get()
@@ -147,8 +149,9 @@ class SplachActivity : AppCompatActivity() {
                                     id = like.id,
                                     likerId = like.getString("likerId").toString(),
                                     likeDate = like.getString("likeDate").toString(),
-                                    isLike = like.getBoolean("isLike")!!
-                                )
+                                    isLike = like.getBoolean("isLike")!!,
+                                    i.id
+                               )
                                 postLikesArray.add(likeitem)
 
                             }

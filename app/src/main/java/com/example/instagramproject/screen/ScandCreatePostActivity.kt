@@ -92,7 +92,8 @@ Log.e("ASD","postDelayed")
                                 postMap["postPossition"] = Date().date.toString()
 
 
-                                FirebaseFirestore.getInstance().collection("posts")
+                                FirebaseFirestore.getInstance()
+                                    .collection("posts")
                                     .add(postMap)
                                     .addOnSuccessListener { it ->
 
@@ -101,10 +102,11 @@ Log.e("ASD","postDelayed")
                                             uirMap[i.toString()] = arrayUrlPostImages[i]
                                             Log.e("ASD", arrayUrlPostImages[i])
                                             Log.e("ASD", uirMap.isNotEmpty().toString())
-                                            Log.e("ASD", uirMap["${i}"]?:"ASD")
+                                            Log.e("ASD", uirMap["$i"]?:"ASD")
 
                                         }
-                                        FirebaseFirestore.getInstance().collection("posts")
+                                        FirebaseFirestore.getInstance()
+                                            .collection("posts")
                                             .document(it.id)
                                             .collection("postImagesUrl")
                                             .add(uirMap)

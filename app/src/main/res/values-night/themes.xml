@@ -10,6 +10,7 @@
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorAccent">#888888</item>
+        <item name="trackColor">#00000000</item>
         <item name="android:fontFamily">@font/arvo</item>
 
         <!-- Status bar color. -->
