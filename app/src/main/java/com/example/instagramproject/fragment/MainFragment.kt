@@ -1,14 +1,15 @@
 package com.example.instagramproject.fragment
 
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.instagramproject.R
 import com.example.instagramproject.ScandryFragments.*
 import com.example.instagramproject.databinding.FragmentMainBinding
-import com.example.instagramproject.screen.MainActivity
 import com.google.android.material.tabs.TabLayout
 
 
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
             .replace(R.id.con_FragmentContainer, SubMainFragment())
             .commit()
     }
+
     // initialization   :: :: ::
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,8 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(layoutInflater)
 
         return binding.root
+
+
     }
 
     override fun onStart() {
@@ -43,31 +47,104 @@ class MainFragment : Fragment() {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, SubMainFragment())
                             .commit()
-                    }
-                    1 -> {
+                        val nightModeFlags =
+                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
-                        requireActivity().supportFragmentManager.beginTransaction()
+                        when (nightModeFlags) {
+                            Configuration.UI_MODE_NIGHT_YES -> {
+
+                            }
+                            Configuration.UI_MODE_NIGHT_NO -> {
+                                binding.tabTapLayout.setBackgroundColor(Color.WHITE)
+
+                            }
+                            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+                        }
+
+                        }
+                    1 -> {
+                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, SearchFragment())
                             .commit()
+
+                        val nightModeFlags =
+                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+                        when (nightModeFlags) {
+                            Configuration.UI_MODE_NIGHT_YES -> {
+
+                            }
+                            Configuration.UI_MODE_NIGHT_NO -> {
+                                binding.tabTapLayout.setBackgroundColor(Color.WHITE)
+
+                            }
+                            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+                        }
+
                     }
+
+
+
                     2 -> {
 
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, RealsFragment())
                             .commit()
-                    }
-                    3 -> {
 
+                        val nightModeFlags =
+                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+                        when (nightModeFlags) {
+                            Configuration.UI_MODE_NIGHT_YES -> {
+
+                            }
+                            Configuration.UI_MODE_NIGHT_NO -> {
+                                binding.tabTapLayout.setBackgroundColor(Color.rgb(176, 176, 176))
+
+                            }
+                            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+                        }
+
+                    }
+
+
+                    3 -> {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, NotficationFragment())
                             .commit()
+                        val nightModeFlags =
+                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+                        when (nightModeFlags) {
+                            Configuration.UI_MODE_NIGHT_YES -> {
+
+                            }
+                            Configuration.UI_MODE_NIGHT_NO -> {
+                                binding.tabTapLayout.setBackgroundColor(Color.WHITE)
+                            }
+                            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+                        }
+
+
                     }
                     4 -> {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, ProfileFragment())
                             .commit()
-                    }
+                        val nightModeFlags =
+                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
+                        when (nightModeFlags) {
+                            Configuration.UI_MODE_NIGHT_YES -> {
+
+                            }
+                            Configuration.UI_MODE_NIGHT_NO -> {
+                                binding.tabTapLayout.setBackgroundColor(Color.WHITE)
+
+                            }
+                            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
+                        }
+                    }
                 }
             }
 

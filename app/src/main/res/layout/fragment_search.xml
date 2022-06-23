@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScandryFragments.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="54dp"
+        android:layout_gravity="top"
+        >
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="5dp"
+                android:layout_weight="6"
+                android:layout_marginStart="2dp"
+                app:cardBackgroundColor="#F6F6F6"
+                app:cardCornerRadius="8dp"
+
+                >
+
+                <EditText
+                    android:background="#00FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_10sdp"
+                    android:hint="Search"
+
+                    android:drawableStart="@drawable/ic_baseline_search_24asdsad"
+                    android:layout_marginStart="4dp"
+                    />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:paddingHorizontal="2dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="?attr/colorOnSecondary"
+                android:visibility="visible"
+
+                />
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+</LinearLayout>

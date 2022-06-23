@@ -233,6 +233,7 @@ class SignUp2Activity : AppCompatActivity() {
                         map["password"] = passWord
                         map["userName"] = userName
                         map["imageUrl"] = "http://www.gravatar.com/avatar/?d=mp"
+                        map["pio"] = ""
                         FirebaseFirestore.getInstance().collection("users")
                             .document(user.user!!.uid)
                             .set(map)
@@ -243,6 +244,11 @@ class SignUp2Activity : AppCompatActivity() {
                                     password =passWord,
                                     userName = userName,
                                     imageUrl = "http://www.gravatar.com/avatar/?d=mp"
+                                        ,
+                                    followers = null,
+                                    folloeing = null,
+                                    posts = null,
+                                    pio = ""
                                     )
 
 

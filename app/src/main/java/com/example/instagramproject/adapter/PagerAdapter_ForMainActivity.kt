@@ -13,4 +13,8 @@ class PagerAdapter_ForMainActivity(var manager: FragmentManager , var arr : Arra
     override fun getItem(position: Int): Fragment {
        return arr[position]
     }
+
+    fun notifyData(){
+        notifyDataSetChanged()
+    }
 }

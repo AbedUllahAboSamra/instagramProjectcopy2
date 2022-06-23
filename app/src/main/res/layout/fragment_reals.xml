@@ -5,10 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".ScandryFragments.RealsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_reels"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:overScrollMode="never"
+        android:scrollIndicators="none" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="32dp"
+        android:text="Reels"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_outline_camera_alt_24"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="32dp"
+        />
 
 </FrameLayout>

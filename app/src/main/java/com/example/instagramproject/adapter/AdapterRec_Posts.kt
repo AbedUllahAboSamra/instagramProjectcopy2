@@ -35,9 +35,17 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
 
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
 
-        var post = arr[position]
+        Log.e("ASD", position.toString()+"POSTS")
 
+        var post = arr[position]
         var isLike = false
+
+        if (arr[position].comments!!.size > 0) {
+            holder.binding.tvViewNumOfComment.text =
+                "View all ${arr[position].comments!!.size} comments..."
+        } else {
+            holder.binding.tvViewNumOfComment.visibility = View.GONE
+        }
 
         if (post.likes?.isNotEmpty() == true) {
             for (i in post.likes!!) {
@@ -72,9 +80,8 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
         var adapter = adapterPagerFilesPick(post.postImagesUrl, null)
         holder.binding.pagerImages.adapter = adapter
 
-// initlzation post Item
+        // initlzation post Item
         holder.binding.tvUserName.text = post.posterName
-        holder.binding.tvPostText.text = post.postText
         holder.binding.tvLocation.text = post.postPossition
         holder.binding.tvTimePostAgo.text = post.postDate
         holder.binding.tvPosterName.text = post.posterName
@@ -84,13 +91,13 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
             isLike = !isLike
 
             if (isLike) {
-
                 holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_24)
-
             } else {
                 holder.binding.btnLike.setImageResource(R.drawable.ic_outline_favorite_border_24)
 
             }
+
+
             var mapLike = HashMap<String, Any>()
             mapLike["likeDate"] = Date().date.toString()
             mapLike["likerId"] = SplachActivity.uId
@@ -141,7 +148,8 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
             } else {
                 post.likes = ArrayList<LikeModel>()
                 post.likes!!.add(likeModle)
-                FirebaseFirestore.getInstance()
+                FirebaseFirestore
+                    .getInstance()
                     .collection("posts")
                     .document(post.postId)
                     .collection("likes")
@@ -150,10 +158,8 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
                         likeModle.id = it.id
                         post.likes!!.add(likeModle)
                         Log.e("ASD", it.id)
-                        Log.e("ASD", "Create like  ")
-                    }.addOnFailureListener {
-
-                    }
+                        Log.e("ASD", "Create like")
+                    }.addOnFailureListener {}
             }
 
 
@@ -166,9 +172,23 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
             context.startActivity(i)
         }
 
+
+        //text align
+
+
+        var space = ""
+        for (i in 0 .. (arr[position].posterName.length)) {
+            space += "   "
+        }
+        holder.binding.tvPostText.text = space + post.postText
+
     }
 
     override fun getItemCount(): Int {
         return arr.size
     }
+
+
+
+
 }

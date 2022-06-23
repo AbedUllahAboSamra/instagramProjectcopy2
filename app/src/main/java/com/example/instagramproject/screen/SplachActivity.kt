@@ -7,10 +7,7 @@ import android.os.Handler
 import android.util.Log
 import com.example.instagramproject.R
 import com.example.instagramproject.databinding.ActivitySplachBinding
-import com.example.instagramproject.model.CommentModel
-import com.example.instagramproject.model.LikeModel
-import com.example.instagramproject.model.PostModel
-import com.example.instagramproject.model.UserModel
+import com.example.instagramproject.model.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import org.w3c.dom.Comment
@@ -36,12 +33,69 @@ class SplachActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             if (uId.isEmpty()) {
+
+                Log.e("ASD","ASDsadasd"+ postsArray.size.toString())
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
                 FirebaseFirestore.getInstance().collection("users")
                     .document(uId)
                     .get().addOnSuccessListener { it ->
+
+                        var following = ArrayList<FollowingModel>()
+                        var followers = ArrayList<FollowingModel>()
+                        var posts = ArrayList<String>()
+
+//get get  following following
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("following")
+                            .get()
+                            .addOnSuccessListener { ites ->
+
+                                for (i in ites){
+                                    var followingModel = FollowingModel(
+                                        userId = i.getString("userId").toString(),
+                                        followDate = i.getString("followDate").toString(),
+                                        isFollow = i.getBoolean("isFollow") == true
+                                    )
+                                    following.add(followingModel)
+                                }
+
+                            }
+
+
+
+//followers followers followers followers
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("followers")
+                            .get()
+                            .addOnSuccessListener { ites ->
+
+                                for (i in ites){
+                                    var followingModel = FollowingModel(
+                                        userId = i.getString("userId").toString(),
+                                        followDate = i.getString("followDate").toString(),
+                                        isFollow = i.getBoolean("isFollow") == true
+                                    )
+                                    followers.add(followingModel)
+                                }
+
+                            }
+
+///posts posts posts
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("posts")
+                            .get()
+                            .addOnSuccessListener { postsss ->
+
+                                for (i in postsss){
+                                    posts.add(i.id)
+                                }
+
+                            }
 
                         currentUser = UserModel(
                             uId = uId,
@@ -50,17 +104,18 @@ class SplachActivity : AppCompatActivity() {
                             accountName = it.getString("accountName").toString(),
                             email = it.getString("email").toString(),
                             password = it.getString("password").toString(),
+                            followers = followers,
+                            folloeing = following,
+                            posts =posts ,
+                            pio = it.getString("pio").toString(),
                         )
-                        startActivity(Intent(this, CommentActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
-                    }
-                    .addOnFailureListener {
+                    }.addOnFailureListener {
                         startActivity(Intent(this, LoginActivity::class.java))
                         finish()
                     }
-
-
-            }
+                 }
 
 
         }, 3000)
@@ -106,7 +161,6 @@ class SplachActivity : AppCompatActivity() {
                                                 likeDate = like.getString("likeDate").toString(),
                                                 isLike = like.getBoolean("isLike")!!,
                                                 comment.id
-
                                             )
                                             commentLikesArray.add(commentLike)
                                         }
@@ -214,7 +268,8 @@ class SplachActivity : AppCompatActivity() {
                         posterImageUrl = i.getString("posterImageUrl").toString(),
                         peopleIdTags = tagPeopleIds,
                         likes = postLikesArray,
-                        comments = commentsArray
+                        comments = commentsArray,
+                        type = i.getString("type").toString()
                     )
                     arr.add(postItem)
                 }

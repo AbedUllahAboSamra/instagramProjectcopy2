@@ -41,14 +41,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/vedio_icon"
-                android:tag="vedio"
                 />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/favoret_icon"
-                android:tag="favorite"
 
                 />
 
@@ -56,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout="@layout/tab_image_view"
-                android:tag="profile"
                 />
 
 

@@ -6,5 +6,9 @@ class UserModel(
     var email: String,
     var password: String,
     var userName: String,
-    var imageUrl: String?
-    )
+    var imageUrl: String?,
+    var posts: ArrayList<String>?,
+    var followers: ArrayList<FollowingModel>?,
+    var folloeing: ArrayList<FollowingModel>?,
+    var pio: String
+)

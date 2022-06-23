@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramproject.databinding.ActivityLoginWithEmailAndPassBinding
 import com.example.instagramproject.model.CustomProgressDialog
+import com.example.instagramproject.model.FollowingModel
 import com.example.instagramproject.model.UserModel
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -107,9 +108,68 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
             var password = binding.edtPassword.text.toString()
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener { it ->
+                    var following = ArrayList<FollowingModel>()
+                    var followers = ArrayList<FollowingModel>()
+                    var posts = ArrayList<String>()
+
+//get get  following following
                     FirebaseFirestore.getInstance().collection("users")
-                        .document(SplachActivity.uId)
+                        .document(it.user!!.uid)
+                        .collection("following")
+                        .get()
+                        .addOnSuccessListener { ites ->
+
+                            for (i in ites){
+                                var followingModel = FollowingModel(
+                                    userId = i.getString("userId").toString(),
+                                    followDate = i.getString("followDate").toString(),
+                                    isFollow = i.getBoolean("isFollow") == true
+                                )
+                                following.add(followingModel)
+                            }
+
+                        }
+
+
+
+//followers followers followers followers
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(it.user!!.uid)
+                        .collection("followers")
+                        .get()
+                        .addOnSuccessListener { ites ->
+
+                            for (i in ites){
+                                var followingModel = FollowingModel(
+                                    userId = i.getString("userId").toString(),
+                                    followDate = i.getString("followDate").toString(),
+                                    isFollow = i.getBoolean("isFollow") == true
+                                )
+                                followers.add(followingModel)
+                            }
+
+                        }
+
+///posts posts posts
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(it.user!!.uid)
+                        .collection("posts")
+                        .get()
+                        .addOnSuccessListener { postsss ->
+
+                            for (i in postsss){
+                               posts.add(i.id)
+                            }
+
+                        }
+
+
+
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(it.user!!.uid)
                         .get().addOnSuccessListener { it ->
+
+
                             SplachActivity.currentUser = UserModel(
                                 uId = SplachActivity.uId,
                                 userName = it.getString("userName").toString(),
@@ -117,6 +177,11 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                                 accountName = it.getString("accountName").toString(),
                                 email = it.getString("email").toString(),
                                 password = it.getString("password").toString(),
+                                pio = it.getString("pio").toString(),
+                                folloeing = following ,
+                                followers =  followers ,
+                                posts = posts
+
                             )
                         }
 
@@ -125,7 +190,7 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                     editor.putString("uId", it.user!!.uid)
                     SplachActivity.uId = it.user!!.uid
                     editor.apply()
-                    if (it.user!!.uid == "") {
+                    if (it.user!!.uid != "") {
                         progressDialog.dialog.dismiss()
                         startActivity(Intent(this, MainActivity::class.java))
                         this.finish()

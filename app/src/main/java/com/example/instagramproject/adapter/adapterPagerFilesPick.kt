@@ -1,16 +1,19 @@
 package com.example.instagramproject.adapter
 
-import android.content.Context
+import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
-import androidx.core.net.toUri
+import androidx.core.app.NotificationCompat
+import androidx.core.view.updateLayoutParams
 import androidx.viewpager.widget.PagerAdapter
+import com.example.instagramproject.R
 import com.example.instagramproject.databinding.DesignImageOrVedioBinding
 import com.squareup.picasso.Picasso
+
 
 class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: ArrayList<Uri>?) :
     PagerAdapter() {
@@ -37,26 +40,81 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
             DesignImageOrVedioBinding.inflate(LayoutInflater.from(container.context), null, false)
         if (arr != null) {
             if (arr!![position].toString().contains("video")) {
-                binding.imageView.visibility = View.GONE
-                binding.VideoView.visibility = View.VISIBLE
+                val mediaController = MediaController(container.context)
+                //      mediaController.setAnchorView(binding.VideoView)
 
+
+                binding.imageView.visibility = View.GONE
+                binding.LayoutFrameVideoView.visibility = View.VISIBLE
                 binding.VideoView.setVideoURI(arr!![position])
-                binding.VideoView.setMediaController(MediaController(container.context))
+                binding.VideoView.requestFocus()
+
+
+//                binding.VideoView.setMediaController(mediaController)
 
             } else {
-                binding.VideoView.visibility = View.GONE
+                binding.LayoutFrameVideoView.visibility = View.GONE
                 binding.imageView.visibility = View.VISIBLE
 
                 binding.imageView.setImageURI(arr!![position])
             }
 
         } else {
-            binding.VideoView.visibility = View.GONE
-            binding.imageView.visibility = View.VISIBLE
 
-            Picasso.with(container.context)
-                .load(arrayFromIInternt!![position])
-                .into(binding.imageView);
+
+            if (arrayFromIInternt!![position].contains("video")) {
+
+
+                binding.LayoutFrameVideoView.visibility = View.VISIBLE
+                binding.imageView.visibility = View.GONE
+                binding.VideoView.setVideoURI(Uri.parse(arrayFromIInternt!![position]))
+
+                var isMute = true
+
+                binding.VideoView.setOnPreparedListener { mp ->
+                    binding.VideoView.start()
+                    amp = mp
+                    mp.setVolume(0f, 0f)
+
+                    binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_off_24)
+                    mp.isLooping = true
+                    binding.VideoView.setOnClickListener{
+                        if (mp.isPlaying){
+                            mp.pause()
+                        }else{
+                            mp.start()
+                        }
+                    }
+                    binding.imgVolume.setOnClickListener {
+
+                        if (isMute) {
+
+                            mp.setVolume(1f, 1f)
+                            if (!mp.isPlaying){
+                                mp.start()
+                            }
+                            binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_up_24)
+                        } else {
+                            mp.setVolume(0f, 0f)
+                            binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_off_24)
+
+                        }
+                        isMute = !isMute
+                    }
+
+
+                }
+
+            } else {
+
+                // internet
+                binding.LayoutFrameVideoView.visibility = View.GONE
+                binding.imageView.visibility = View.VISIBLE
+
+                Picasso.with(container.context)
+                    .load(arrayFromIInternt!![position])
+                    .into(binding.imageView)
+            }
         }
 
 
@@ -64,9 +122,8 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
         return binding.root
 
     }
-
-    fun notitydataSet() {
-        notifyDataSetChanged()
-    }
+companion object{
+    var amp = MediaPlayer()
+}
 
 }

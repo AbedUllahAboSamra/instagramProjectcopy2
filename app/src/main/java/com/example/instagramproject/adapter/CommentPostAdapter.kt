@@ -129,7 +129,8 @@ Log.e("ASD","${i.isLike}")
                     .addOnFailureListener {
                     }
 
-            } else {
+            }
+            else {
                 FirebaseFirestore
                     .getInstance()
                     .collection("posts")
@@ -153,7 +154,6 @@ Log.e("ASD","${i.isLike}")
             }
         }
 
-        Log.e("ASD", mlikeModel.toString())
         IsMyLike=mlikeModel.isLike
         if (IsMyLike) {
             holder.binding.btnLikeComment.setImageResource(R.drawable.ic_baseline_favorite_24)

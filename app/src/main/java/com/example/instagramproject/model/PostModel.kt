@@ -13,7 +13,8 @@ data class PostModel(
     var postDate:String,
     var posterName : String,
     var posterImageUrl: String,
-    var peopleIdTags:ArrayList<String>?
+    var peopleIdTags:ArrayList<String>?,
+    var type:String,
 
 
 )
