@@ -1,14 +1,12 @@
 package com.example.instagramproject.ScandryFragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.instagramproject.adapter.AdapterRec_profileGrid
-import com.example.instagramproject.adapter.PagerAdapter_ForMainActivity
 import com.example.instagramproject.databinding.FragmentProfileBinding
 import com.example.instagramproject.model.PostModel
 import com.example.instagramproject.screen.SplachActivity
@@ -78,6 +76,7 @@ class ProfileFragment : Fragment() {
 
         if (user.pio.isEmpty()) {
             binding.tvPio.visibility = View.GONE
+            binding.btnSeeTranslation.visibility = View.GONE
         } else {
             binding.tvPio.text = user.pio
         }
@@ -85,14 +84,15 @@ class ProfileFragment : Fragment() {
         Picasso.with(requireContext()).load(user.imageUrl).into(binding.userImageId)
 
 
-
         var arr = posts.filter { it ->
             it.type == "p"
         } as ArrayList<PostModel>
 
+
         binding.recGridView.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        var adapter = AdapterRec_profileGrid(arr)
+
+        var adapter = AdapterRec_profileGrid(requireContext(),arr)
         binding.recGridView.adapter = adapter
 
 
@@ -107,7 +107,7 @@ class ProfileFragment : Fragment() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(arr)
+                        var adapter = AdapterRec_profileGrid(requireContext(),arr)
                         binding.recGridView.adapter = adapter
                         adapter.notifyData()
 
@@ -120,7 +120,7 @@ class ProfileFragment : Fragment() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(arr)
+                        var adapter = AdapterRec_profileGrid(requireContext(),arr)
                         binding.recGridView.adapter = adapter
                         adapter.notifyData()
 
@@ -132,7 +132,7 @@ class ProfileFragment : Fragment() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(arr)
+                        var adapter = AdapterRec_profileGrid(requireContext(),arr)
                         binding.recGridView.adapter = adapter
                             adapter.notifyData()
 

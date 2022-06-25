@@ -34,7 +34,6 @@ class RealsFragment : Fragment() {
 
 
 
-
         return binding.root
     }
 }

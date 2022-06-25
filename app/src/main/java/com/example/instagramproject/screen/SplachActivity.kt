@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import com.example.instagramproject.R
 import com.example.instagramproject.databinding.ActivitySplachBinding
 import com.example.instagramproject.model.*
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Comment
 
 class SplachActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplachBinding

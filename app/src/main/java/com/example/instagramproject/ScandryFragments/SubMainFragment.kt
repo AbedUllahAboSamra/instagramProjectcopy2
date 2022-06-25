@@ -48,7 +48,7 @@ class SubMainFragment : Fragment() {
 
         // posts Recycle view Adapter
 
-        var postsAdapter = AdapterRec_Posts(SplachActivity.postsArray)
+        var postsAdapter = AdapterRec_Posts(requireContext(),SplachActivity.postsArray)
         var layManeger = LinearLayoutManager(requireContext())
         binding.recPosts.layoutManager = layManeger
         binding.recPosts.adapter = postsAdapter

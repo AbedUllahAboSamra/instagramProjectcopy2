@@ -19,6 +19,12 @@
         android:theme="@style/Theme.InstagramProject"
         tools:targetApi="31">
         <activity
+            android:name=".screen.PostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.PersonProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.CommentActivity"
             android:exported="false" />
         <activity

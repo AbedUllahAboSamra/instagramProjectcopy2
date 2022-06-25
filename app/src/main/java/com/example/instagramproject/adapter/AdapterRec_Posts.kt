@@ -13,21 +13,21 @@ import com.example.instagramproject.databinding.DesignPostItemBinding
 import com.example.instagramproject.model.LikeModel
 import com.example.instagramproject.model.PostModel
 import com.example.instagramproject.screen.CommentActivity
+import com.example.instagramproject.screen.PersonProfileActivity
 import com.example.instagramproject.screen.SplachActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.NonDisposableHandle.parent
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
+class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
     RecyclerView.Adapter<AdapterRec_Posts.myViewHoleder>() {
-    lateinit var context: Context
 
     class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHoleder {
-        context = parent.context
         val binding =
             DesignPostItemBinding.inflate(LayoutInflater.from(parent.context), null, false)
         return myViewHoleder(binding)
@@ -35,8 +35,7 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
 
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
 
-        Log.e("ASD", position.toString()+"POSTS")
-
+        Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.userImageId)
         var post = arr[position]
         var isLike = false
 
@@ -177,18 +176,36 @@ class AdapterRec_Posts(var arr: ArrayList<PostModel>) :
 
 
         var space = ""
-        for (i in 0 .. (arr[position].posterName.length)) {
+        for (i in 0..(arr[position].posterName.length)) {
             space += "   "
         }
         holder.binding.tvPostText.text = space + post.postText
+
+
+
+
+
+        holder.binding.btnClickToOpenPersonProfile.setOnClickListener {
+Log
+    .e("ASD","Clicked")
+            if (post.posterId == SplachActivity.uId) {
+                Log.e("ASD","Clickedtrue")
+            } else {
+                Log.e("ASD","Clickedfalse")
+                var i = Intent(context, PersonProfileActivity::class.java)
+                i.putExtra("personId", post.posterId)
+                i.putExtra("image", post.posterImageUrl)
+                i.putExtra("name", post.posterName)
+                context.startActivity(i)
+            }
+
+        }
 
     }
 
     override fun getItemCount(): Int {
         return arr.size
     }
-
-
 
 
 }

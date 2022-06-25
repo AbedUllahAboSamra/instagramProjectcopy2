@@ -54,6 +54,7 @@
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/card_profile_background.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1355" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_music_note_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_search_24asdsad.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.1355" />
@@ -72,6 +73,8 @@
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_comment.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_first_create_post.xml" value="0.18181818181818182" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_main.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_person_profile.xml" value="0.3856115107913669" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_post.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_scand_create_post.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_sign_up2.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_splach.xml" value="0.20677083333333332" />

@@ -93,9 +93,8 @@ class ScandCreatePostActivity : AppCompatActivity() {
                                     postMap["posterId"] = SplachActivity.uId
                                     postMap["postText"] = binding.edtPostContent.text.toString()
                                     postMap["postDate"] = Date().date.toString()
-                                    postMap["posterImageUrl"] =
-                                        "https://i.picsum.photos/id/782/200/300.jpg?grayscale&hmac=pVq8q45ZnyWOPDP3vRLdOwswl3w3koNTFoGtUI8GVjE"
-                                    postMap["posterName"] = "Abod Ayman0"
+                                    postMap["posterImageUrl"] = SplachActivity.currentUser!!.imageUrl.toString()
+                                    postMap["posterName"] = SplachActivity.currentUser!!.userName.toString()
                                     postMap["postPossition"] = Date().date.toString()
 
 
@@ -171,17 +170,15 @@ class ScandCreatePostActivity : AppCompatActivity() {
 
 
                                 Handler().postDelayed({
-              //////////////////////
+
                                     var postMap = HashMap<String, Any>()
                                     postMap["posterId"] = SplachActivity.uId
                                     postMap["postText"] = binding.edtPostContent.text.toString()
                                     postMap["postDate"] = Date().date.toString()
-                                    postMap["posterImageUrl"] =
-                                        "https://i.picsum.photos/id/782/200/300.jpg?grayscale&hmac=pVq8q45ZnyWOPDP3vRLdOwswl3w3koNTFoGtUI8GVjE"
-                                    postMap["posterName"] = SplachActivity.currentUser!!.userName
+                                    postMap["posterImageUrl"] = SplachActivity.currentUser!!.imageUrl.toString()
+                                        postMap["posterName"] = SplachActivity.currentUser!!.userName
                                     postMap["postPossition"] = Date().date.toString()
                                     postMap["type"] = "p"
-
 
                                     FirebaseFirestore.getInstance()
                                         .collection("posts")
