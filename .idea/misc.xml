@@ -52,8 +52,11 @@
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/border.xml" value="0.127" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/btn_follow.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/card_profile_background.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.214" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_extension_24.xml" value="0.1675" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1355" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_mic_none_24.xml" value="0.1675" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_music_note_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_search_24asdsad.xml" value="0.157" />
@@ -62,29 +65,37 @@
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_baseline_volume_up_24.xml" value="0.1" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_camera_alt_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_grid_on_24.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_image_24.xml" value="0.1675" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_mode_comment_24.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_note_alt_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_sensor_occupied_24.xml" value="0.157" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_outline_video_call_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_round_collections_24.xml" value="0.157" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/ic_round_keyboard_arrow_right_24.xml" value="0.214" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/post_text_color.xml" value="0.1355" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/tab_background.xml" value="0.1355" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/drawable/tabs_images.xml" value="0.1355" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout-v23/fragment_profile.xml" value="0.20677083333333332" />
-        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_comment.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_comment.xml" value="0.33" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_first_create_post.xml" value="0.18181818181818182" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_login.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_main.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_massages_chat.xml" value="0.22" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_person_profile.xml" value="0.3856115107913669" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_post.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_scand_create_post.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_sign_up2.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_splach.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/activity_tag_people.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_chat_item.xml" value="0.33" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_comment_item.xml" value="0.33" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_image_or_vedio.xml" value="0.25" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_massages_for_adapter.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_post_item.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_profile_vedio_item.xml" value="0.20572916666666666" />
-        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_reel_item.xml" value="0.408016443987667" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_reel_item.xml" value="0.18" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/design_story_item.xml" value="0.20677083333333332" />
+        <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/fragment_chats.xml" value="0.18" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/fragment_first.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/fragment_grid.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/hp/StudioProjects/instagram_app-master/app/src/main/res/layout/fragment_main.xml" value="0.20677083333333332" />

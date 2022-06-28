@@ -31,12 +31,12 @@
                 >
 
                 <EditText
+                    android:id="@+id/edt_search"
                     android:background="#00FFFFFF"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/_10sdp"
                     android:hint="Search"
-
                     android:drawableStart="@drawable/ic_baseline_search_24asdsad"
                     android:layout_marginStart="4dp"
                     />

@@ -33,8 +33,6 @@ class CommentActivity : AppCompatActivity() {
         binding = ActivityCommentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         postId = intent.getStringExtra("postId").toString()
-        postId = "3IGjlSjZcZPDHLfSELXo"
-
 
         // post initialization
         for (i in SplachActivity.postsArray) {

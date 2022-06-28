@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramproject.databinding.ActivityScandCreatePostBinding
 import com.example.instagramproject.model.CustomProgressDialog
+import com.example.instagramproject.model.PostModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -42,7 +43,6 @@ class ScandCreatePostActivity : AppCompatActivity() {
         setContentView(binding.root)
         for (i in FirstCreatePostActivity.mArrayUri) {
             if (i.toString().contains("video")) {
-
                 mvedioBit.add(i)
 
             } else {
@@ -51,6 +51,7 @@ class ScandCreatePostActivity : AppCompatActivity() {
             }
 
         }
+
 
     }
 
@@ -93,15 +94,35 @@ class ScandCreatePostActivity : AppCompatActivity() {
                                     postMap["posterId"] = SplachActivity.uId
                                     postMap["postText"] = binding.edtPostContent.text.toString()
                                     postMap["postDate"] = Date().date.toString()
-                                    postMap["posterImageUrl"] = SplachActivity.currentUser!!.imageUrl.toString()
-                                    postMap["posterName"] = SplachActivity.currentUser!!.userName.toString()
+                                    postMap["posterImageUrl"] =
+                                        SplachActivity.currentUser!!.imageUrl.toString()
+                                    postMap["posterName"] =
+                                        SplachActivity.currentUser!!.userName.toString()
                                     postMap["postPossition"] = Date().date.toString()
+                                    postMap["type"] = "p"
 
 
                                     FirebaseFirestore.getInstance()
                                         .collection("posts")
                                         .add(postMap)
                                         .addOnSuccessListener { it ->
+
+                                            SplachActivity.postsArray.add(
+                                                PostModel(
+                                                    posterId = SplachActivity.uId,
+                                                    postText = binding.edtPostContent.text.toString(),
+                                                    postDate = Date().date.toString(),
+                                                    posterImageUrl = SplachActivity.currentUser!!.imageUrl.toString(),
+                                                    posterName = SplachActivity.currentUser!!.userName.toString(),
+                                                    postPossition = Date().date.toString(),
+                                                    type = "p",
+                                                    postId = it.id,
+                                                    postImagesUrl = arrayUrlPostImages,
+                                                    comments = null,
+                                                    likes = null,
+                                                    peopleIdTags = null,
+                                                )
+                                            )
 
 
                                             FirebaseFirestore
@@ -110,9 +131,8 @@ class ScandCreatePostActivity : AppCompatActivity() {
                                                 .document(SplachActivity.uId)
                                                 .collection("posts")
                                                 .document(it.id)
-                                                .set(HashMap<String,Any>())
-
-
+                                                .set(HashMap<String, Any>())
+                                            SplachActivity.currentUser!!.posts!!.add(it.id)
 
 
                                             var uirMap = HashMap<String, String>()
@@ -136,11 +156,7 @@ class ScandCreatePostActivity : AppCompatActivity() {
 
 
                                         }.addOnFailureListener {
-                                            Toast.makeText(
-                                                this,
-                                                "Check your connection",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            Log.e("ASD", it.toString())
                                         }
 
                                 }, 2000)
@@ -162,7 +178,7 @@ class ScandCreatePostActivity : AppCompatActivity() {
                     var uploadTask = childref.putBytes(data)
 
                     uploadTask.addOnFailureListener {
-                        Toast.makeText(this, "Check your connection", Toast.LENGTH_SHORT).show()
+                        Log.e("ASD", it.toString())
                     }.addOnSuccessListener { taskSnap ->
                         childref.downloadUrl.addOnSuccessListener { it ->
                             arrayUrlPostImages.add(it.toString())
@@ -175,31 +191,52 @@ class ScandCreatePostActivity : AppCompatActivity() {
                                     postMap["posterId"] = SplachActivity.uId
                                     postMap["postText"] = binding.edtPostContent.text.toString()
                                     postMap["postDate"] = Date().date.toString()
-                                    postMap["posterImageUrl"] = SplachActivity.currentUser!!.imageUrl.toString()
-                                        postMap["posterName"] = SplachActivity.currentUser!!.userName
+                                    postMap["posterImageUrl"] =
+                                        SplachActivity.currentUser!!.imageUrl.toString()
+                                    postMap["posterName"] = SplachActivity.currentUser!!.userName
                                     postMap["postPossition"] = Date().date.toString()
                                     postMap["type"] = "p"
+
 
                                     FirebaseFirestore.getInstance()
                                         .collection("posts")
                                         .add(postMap)
                                         .addOnSuccessListener { it ->
+                                            FirebaseFirestore
+                                                .getInstance()
+                                                .collection("users")
+                                                .document(SplachActivity.uId)
+                                                .collection("posts")
+                                                .document(it.id)
+                                                .set(HashMap<String, Any>())
 
 
-                                                FirebaseFirestore
-                                                    .getInstance()
-                                                    .collection("users")
-                                                    .document(SplachActivity.uId)
-                                                    .collection("posts")
-                                                    .document(it.id)
-                                                    .set(HashMap<String,Any>())
+                                            SplachActivity.postsArray.add(
+                                                PostModel(
+                                                    posterId = SplachActivity.uId,
+                                                    postText = binding.edtPostContent.text.toString(),
+                                                    postDate = Date().date.toString(),
+                                                    posterImageUrl = SplachActivity.currentUser!!.imageUrl.toString(),
+                                                    posterName = SplachActivity.currentUser!!.userName.toString(),
+                                                    postPossition = Date().date.toString(),
+                                                    type = "p",
+                                                    postId = it.id,
+                                                    postImagesUrl = arrayUrlPostImages,
+                                                    comments = null,
+                                                    likes = null,
+                                                    peopleIdTags = null,
+                                                )
+                                            )
 
+                                            SplachActivity.currentUser!!.posts!!.add(it.id)
 
                                             var uirMap = HashMap<String, String>()
                                             for (i in 0 until arrayUrlPostImages.size) {
                                                 uirMap[i.toString()] = arrayUrlPostImages[i]
 
                                             }
+
+
                                             FirebaseFirestore
                                                 .getInstance()
                                                 .collection("posts")
@@ -218,11 +255,7 @@ class ScandCreatePostActivity : AppCompatActivity() {
 
 
                                         }.addOnFailureListener {
-                                            Toast.makeText(
-                                                this,
-                                                "Check your connection",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            Log.e("ASD", it.toString())
                                         }
 
                                 }, 2000)

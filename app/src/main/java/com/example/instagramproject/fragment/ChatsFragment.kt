@@ -1,59 +1,137 @@
 package com.example.instagramproject.fragment
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagramproject.R
+import com.example.instagramproject.adapter.AdapterChatsAdapter
+import com.example.instagramproject.databinding.FragmentChatsBinding
+import com.example.instagramproject.model.MassageModle
+import com.example.instagramproject.model.UserModel
+import com.example.instagramproject.screen.MainActivity
+import com.example.instagramproject.screen.SplachActivity
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ChatsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ChatsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    companion object {
+        lateinit var binding: FragmentChatsBinding
+        var chatsOfPositions = ArrayList<ArrayList<MassageModle>>()
+
     }
+
+    var arrChatUsers = ArrayList<UserModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chats, container, false)
+        binding = FragmentChatsBinding.inflate(layoutInflater)
+        getChats()
+        binding.recChats.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.userName.text = SplachActivity.currentUser!!.userName
+6
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ChatsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ChatsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    fun getChats() {
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(SplachActivity.uId)
+            .collection("chats")
+            .get()
+            .addOnSuccessListener { chatsItems ->
+
+
+                for (i in chatsItems) {
+
+                    FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .document(i.id)
+                        .get()
+                        .addOnSuccessListener { usr ->
+                            var user = UserModel(
+                                uId = i.id,
+                                accountName = usr.getString("accountName")
+                                    .toString(),
+                                email = usr.getString("email").toString(),
+                                password = usr.getString("password").toString(),
+                                userName = usr.getString("userName").toString(),
+                                imageUrl = usr.getString("imageUrl").toString(),
+                                posts = null,
+                                followers = null,
+                                folloeing = null,
+                                pio = usr.getString("pio").toString(),
+                            )
+
+                            arrChatUsers.add(user)
+
+                            var arr = ArrayList<MassageModle>()
+                            FirebaseFirestore.getInstance()
+                                .collection("users")
+                                .document(SplachActivity.uId)
+                                .collection("chats")
+                                .document(i.id)
+                                .collection("massages")
+                                .get()
+                                .addOnSuccessListener { massages ->
+                                    Log.e("ASD", "ASD")
+                                    for (massage in massages) {
+                                        var massageModle = MassageModle(
+                                            id = massage.id,
+                                            senderId = massage.getString("senderId")
+                                                .toString(),
+                                            recevierId = massage.getString("recevierId")
+                                                .toString(),
+                                            senfdateTime = massage.getString("senfdateTime")
+                                                .toString(),
+                                            text = massage.getString("text").toString(),
+                                            isSeen = massage.getBoolean("isSeen") == true,
+                                            imageType = massage.getString("imageType")
+                                                .toString(),
+                                            timeSeen = massage.getString("timeSeen")
+                                                .toString(),
+                                            isVoce = massage.getBoolean("isVoce"),
+                                            massageType = massage.getString("massageType")
+                                                .toString(),
+                                            voiceUrl = massage.getString("voiceUrl")
+                                                .toString(),
+                                            imageUrl = massage.getString("imageUrl")
+                                                .toString()
+                                        )
+                                        Log.e("ASD", massageModle.text.toString())
+                                        arr.add(massageModle)
+                                    }
+                                    chatsOfPositions.add(arr)
+                                    Log.e("ASD", chatsOfPositions.size.toString() + "ASD")
+
+                                    Log.e("ASD", arrChatUsers.size.toString() + "arrChatUsers.size")
+                                    Log.e("ASD", chatsItems.size().toString() + "chatsItems.size")
+                                    Log.e(
+                                        "ASD",
+                                        chatsOfPositions.size.toString() + "chatsOfPositions.size"
+                                    )
+
+                                    if (arrChatUsers.size == chatsItems.size() && chatsOfPositions.size == chatsItems.size()) {
+                                        binding.recChats.adapter = AdapterChatsAdapter(arrChatUsers)
+                                    }
+                                }.addOnFailureListener {
+                                    Log.e("ASD", it.toString() + "ASDDSA")
+                                }
+
+
+                        }
+
+                    Log.e("ASD", i.id)
+
+
                 }
             }
     }

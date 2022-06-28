@@ -35,7 +35,7 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-
+        Log.e("ASD", "ASDASDASD$position")
         var binding =
             DesignImageOrVedioBinding.inflate(LayoutInflater.from(container.context), null, false)
         if (arr != null) {
@@ -78,10 +78,10 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
 
                     binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_off_24)
                     mp.isLooping = true
-                    binding.VideoView.setOnClickListener{
-                        if (mp.isPlaying){
+                    binding.VideoView.setOnClickListener {
+                        if (mp.isPlaying) {
                             mp.pause()
-                        }else{
+                        } else {
                             mp.start()
                         }
                     }
@@ -90,7 +90,7 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
                         if (isMute) {
 
                             mp.setVolume(1f, 1f)
-                            if (!mp.isPlaying){
+                            if (!mp.isPlaying) {
                                 mp.start()
                             }
                             binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_up_24)
@@ -122,8 +122,12 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
         return binding.root
 
     }
-companion object{
-    var amp = MediaPlayer()
-}
 
+    companion object {
+        var amp = MediaPlayer()
+    }
+
+    fun noty() {
+        notifyDataSetChanged()
+    }
 }

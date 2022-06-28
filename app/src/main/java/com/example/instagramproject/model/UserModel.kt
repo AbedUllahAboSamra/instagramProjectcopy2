@@ -10,5 +10,7 @@ class UserModel(
     var posts: ArrayList<String>?,
     var followers: ArrayList<FollowingModel>?,
     var folloeing: ArrayList<FollowingModel>?,
-    var pio: String
-)
+    var pio: String,
+
+
+    )

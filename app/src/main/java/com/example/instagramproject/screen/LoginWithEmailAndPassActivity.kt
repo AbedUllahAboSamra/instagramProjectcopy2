@@ -119,7 +119,7 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { ites ->
 
-                            for (i in ites){
+                            for (i in ites) {
                                 var followingModel = FollowingModel(
                                     userId = i.getString("userId").toString(),
                                     followDate = i.getString("followDate").toString(),
@@ -131,7 +131,6 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                         }
 
 
-
 //followers followers followers followers
                     FirebaseFirestore.getInstance().collection("users")
                         .document(it.user!!.uid)
@@ -139,7 +138,7 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { ites ->
 
-                            for (i in ites){
+                            for (i in ites) {
                                 var followingModel = FollowingModel(
                                     userId = i.getString("userId").toString(),
                                     followDate = i.getString("followDate").toString(),
@@ -157,8 +156,8 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { postsss ->
 
-                            for (i in postsss){
-                               posts.add(i.id)
+                            for (i in postsss) {
+                                posts.add(i.id)
                             }
 
                         }
@@ -178,11 +177,12 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                                 email = it.getString("email").toString(),
                                 password = it.getString("password").toString(),
                                 pio = it.getString("pio").toString(),
-                                folloeing = following ,
-                                followers =  followers ,
-                                posts = posts
+                                folloeing = following,
+                                followers = followers,
+                                posts = posts,
 
                             )
+
                         }
 
                     var shared = getSharedPreferences("My", MODE_PRIVATE)

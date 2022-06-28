@@ -1,5 +1,6 @@
 package com.example.instagramproject.screen
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,7 +34,7 @@ class PersonProfileActivity : AppCompatActivity() {
 
         var id = intent.getStringExtra("personId").toString()
 
-        Log.e("ASD", id)
+
         var image = intent.getStringExtra("image")
         var name = intent.getStringExtra("name")
         Picasso.with(this)
@@ -141,7 +142,7 @@ class PersonProfileActivity : AppCompatActivity() {
                     folloeing = following,
                     posts = posts,
                     pio = it.getString("pio").toString(),
-                )
+                    )
 
                 var followersNum = 0
                 var folloeingNum = 0
@@ -349,8 +350,14 @@ class PersonProfileActivity : AppCompatActivity() {
 
 
         }
+        binding.btnMassage.setOnClickListener {
+          var intent = Intent(this,MassagesChatActivity::class.java)
+          intent.putExtra("id",id)
+          intent.putExtra("name",name)
+          intent.putExtra("image",image)
+startActivity(intent)
 
-
+        }
     }
 
 

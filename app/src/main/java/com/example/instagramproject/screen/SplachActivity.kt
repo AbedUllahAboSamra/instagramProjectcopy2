@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import com.example.instagramproject.adapter.AdapterChatsAdapter
 import com.example.instagramproject.databinding.ActivitySplachBinding
+import com.example.instagramproject.fragment.ChatsFragment
 import com.example.instagramproject.model.*
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -16,106 +18,27 @@ class SplachActivity : AppCompatActivity() {
         var uId = ""
         var postsArray = ArrayList<PostModel>()
         var currentUser: UserModel? = null
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplachBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         uId = getSharedPreferences("My", MODE_PRIVATE).getString("uId", "").toString()
-
+        if (!uId.isEmpty()) {
+            getCurrentUser() }
 
         postsArray = getPosts()
-
         Handler().postDelayed({
             if (uId.isEmpty()) {
 
-                Log.e("ASD","ASDsadasd"+ postsArray.size.toString())
+                Log.e("ASD", "ASDsadasd" + postsArray.size.toString())
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
-            } else {
-                FirebaseFirestore.getInstance().collection("users")
-                    .document(uId)
-                    .get().addOnSuccessListener { it ->
-
-                        var following = ArrayList<FollowingModel>()
-                        var followers = ArrayList<FollowingModel>()
-                        var posts = ArrayList<String>()
-
-//get get  following following
-                        FirebaseFirestore.getInstance().collection("users")
-                            .document(SplachActivity.uId)
-                            .collection("following")
-                            .get()
-                            .addOnSuccessListener { ites ->
-
-                                for (i in ites){
-                                    var followingModel = FollowingModel(
-                                        userId = i.getString("userId").toString(),
-                                        followDate = i.getString("followDate").toString(),
-                                        isFollow = i.getBoolean("isFollow") == true
-                                    )
-                                    following.add(followingModel)
-                                }
-
-                            }
-
-
-
-//followers followers followers followers
-                        FirebaseFirestore.getInstance().collection("users")
-                            .document(SplachActivity.uId)
-                            .collection("followers")
-                            .get()
-                            .addOnSuccessListener { ites ->
-
-                                for (i in ites){
-                                    var followingModel = FollowingModel(
-                                        userId = i.getString("userId").toString(),
-                                        followDate = i.getString("followDate").toString(),
-                                        isFollow = i.getBoolean("isFollow") == true
-                                    )
-                                    followers.add(followingModel)
-                                }
-
-                            }
-
-///posts posts posts
-                        FirebaseFirestore.getInstance().collection("users")
-                            .document(SplachActivity.uId)
-                            .collection("posts")
-                            .get()
-                            .addOnSuccessListener { postsss ->
-
-                                for (i in postsss){
-                                    posts.add(i.id)
-                                }
-
-                            }
-
-                        currentUser = UserModel(
-                            uId = uId,
-                            userName = it.getString("userName").toString(),
-                            imageUrl = it.getString("imageUrl").toString(),
-                            accountName = it.getString("accountName").toString(),
-                            email = it.getString("email").toString(),
-                            password = it.getString("password").toString(),
-                            followers = followers,
-                            folloeing = following,
-                            posts =posts ,
-                            pio = it.getString("pio").toString(),
-                        )
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
-                    }.addOnFailureListener {
-                        startActivity(Intent(this, LoginActivity::class.java))
-                        finish()
-                    }
-                 }
-
-
-        }, 3000)
+            }
+                              }, 3000)
 
     }
 
@@ -202,7 +125,7 @@ class SplachActivity : AppCompatActivity() {
                                     likeDate = like.getString("likeDate").toString(),
                                     isLike = like.getBoolean("isLike")!!,
                                     i.id
-                               )
+                                )
                                 postLikesArray.add(likeitem)
 
                             }
@@ -270,7 +193,7 @@ class SplachActivity : AppCompatActivity() {
                     )
                     arr.add(postItem)
                 }
-                Log.e("ASD", "get all sucsess Failure")
+                Log.e("ASD", "get all sucsess KISS")
 
             }
             .addOnFailureListener { _ ->
@@ -279,6 +202,102 @@ class SplachActivity : AppCompatActivity() {
 
         return arr
     }
+
+fun getCurrentUser (){
+    FirebaseFirestore.getInstance().collection("users")
+        .document(uId)
+        .get().addOnSuccessListener { it ->
+
+            var following = ArrayList<FollowingModel>()
+            var followers = ArrayList<FollowingModel>()
+            var posts = ArrayList<String>()
+
+
+
+//get get  following following
+            FirebaseFirestore.getInstance().collection("users")
+                .document(uId)
+                .collection("following")
+                .get()
+                .addOnSuccessListener { ites ->
+                    Log.e("ASD", "followingusersaddOnSuccessListener")
+
+                    for (i in ites) {
+                        var followingModel = FollowingModel(
+                            userId = i.getString("userId").toString(),
+                            followDate = i.getString("followDate").toString(),
+                            isFollow = i.getBoolean("isFollow") == true
+                        )
+                        following.add(followingModel)
+                    }
+
+                }
+
+
+//followers followers followers followers
+            FirebaseFirestore.getInstance().collection("users")
+                .document(uId)
+                .collection("followers")
+                .get()
+                .addOnSuccessListener { ites ->
+                    var position = 0
+
+                    for (i in ites) {
+                        var followingModel = FollowingModel(
+                            userId = i.getString("userId").toString(),
+                            followDate = i.getString("followDate").toString(),
+                            isFollow = i.getBoolean("isFollow") == true
+                        )
+
+
+                        followers.add(followingModel)
+                        if (position == ites.size() - 1) {
+
+
+                        }
+                        position++
+
+                    }
+
+
+                }
+
+///posts posts posts
+            FirebaseFirestore.getInstance().collection("users")
+                .document(SplachActivity.uId)
+                .collection("posts")
+                .get()
+                .addOnSuccessListener { postsss ->
+                    Log.e("ASD", "userspostsaddOnSuccessListener")
+
+                    for (i in postsss) {
+                        posts.add(i.id)
+                    }
+
+                }
+
+
+
+            currentUser = UserModel(
+                uId = uId,
+                userName = it.getString("userName").toString(),
+                imageUrl = it.getString("imageUrl").toString(),
+                accountName = it.getString("accountName").toString(),
+                email = it.getString("email").toString(),
+                password = it.getString("password").toString(),
+                followers = followers,
+                folloeing = following,
+                posts = posts,
+                pio = it.getString("pio").toString(),
+
+            )
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }.addOnFailureListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+}
 
 
 }

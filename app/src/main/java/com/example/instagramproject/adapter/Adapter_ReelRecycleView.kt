@@ -27,6 +27,7 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
 
 
     lateinit var context: Context
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
         context = parent.context
         var binding = DesignReelItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -34,14 +35,21 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
     }
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
-
+        holder.binding.progressBar.visibility = View.VISIBLE
         Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.posterImage)
+        Picasso.with(context).load(arr[position].posterImageUrl)
+            .into(holder.binding.posterImageToSong)
+
         holder.binding.ReelVedio.setVideoURI(Uri.parse(arr[position].postImagesUrl!![0]))
-        holder.binding.ReelVedio.start()
         holder.binding.posterName.text = arr[position].posterName
 
         holder.binding.ReelVedio.setOnPreparedListener { mp ->
-            mp.isLooping = true
+            holder.binding.progressBar.visibility = View.GONE
+            mp.start()
+        }
+        holder.binding.ReelVedio.setOnCompletionListener { mo ->
+            mo.start()
+
         }
 
         var isLike = false

@@ -24,6 +24,7 @@ import kotlin.collections.HashMap
 
 class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
     RecyclerView.Adapter<AdapterRec_Posts.myViewHoleder>() {
+   lateinit var adapter : adapterPagerFilesPick
 
     class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -36,12 +37,19 @@ class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
 
         Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.userImageId)
+
+         adapter = adapterPagerFilesPick(arr[position].postImagesUrl, null)
+        if(position!=0){
+            adapter.noty()
+        }
+        holder.binding.pagerImages.adapter = adapter
+        holder.binding.tabTablayoutWithViewPager.setupWithViewPager(holder.binding.pagerImages)
+
         var post = arr[position]
         var isLike = false
 
         if (arr[position].comments!!.size > 0) {
-            holder.binding.tvViewNumOfComment.text =
-                "View all ${arr[position].comments!!.size} comments..."
+            holder.binding.tvViewNumOfComment.text = "View all ${arr[position].comments!!.size} comments..."
         } else {
             holder.binding.tvViewNumOfComment.visibility = View.GONE
         }
@@ -60,8 +68,8 @@ class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
             }
 
         }
+
         holder.binding.tabTablayoutWithViewPager.visibility = View.VISIBLE
-        holder.binding.pagerImages.setPadding(10, 0, 10, 0);
         holder.binding.pagerImages.clipToPadding = false
         holder.binding.pagerImages.pageMargin = 10
 
@@ -69,15 +77,17 @@ class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
 
         if (post.postImagesUrl!!.size == 1) {
             holder.binding.tabTablayoutWithViewPager.visibility = View.GONE
+
+
         } else {
             holder.binding.tabTablayoutWithViewPager.visibility = View.VISIBLE
-
         }
 
-        // pager adapter
-        holder.binding.tabTablayoutWithViewPager.setupWithViewPager(holder.binding.pagerImages)
-        var adapter = adapterPagerFilesPick(post.postImagesUrl, null)
-        holder.binding.pagerImages.adapter = adapter
+
+
+
+
+
 
         // initlzation post Item
         holder.binding.tvUserName.text = post.posterName

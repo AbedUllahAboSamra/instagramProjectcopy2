@@ -25,6 +25,7 @@ class FirstCreatePostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mArrayUri.clear()
         binding = ActivityFirstCreatePostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.to_ToolBar))

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -224,6 +225,7 @@ class SignUp2Activity : AppCompatActivity() {
                 && passWord.isNotEmpty()
                 && accountNAme.isNotEmpty()
             ) {
+                Log.e("ASD","ASD")
                 auth.createUserWithEmailAndPassword(email, passWord)
                     .addOnSuccessListener { user ->
                         progressDialog.show(this)
@@ -248,7 +250,8 @@ class SignUp2Activity : AppCompatActivity() {
                                     followers = null,
                                     folloeing = null,
                                     posts = null,
-                                    pio = ""
+                                    pio = "",
+
                                     )
 
 
@@ -270,6 +273,8 @@ class SignUp2Activity : AppCompatActivity() {
 
                     }
                     .addOnFailureListener {
+                        Log.e("ASD",it.toString())
+
                     }
 
             }

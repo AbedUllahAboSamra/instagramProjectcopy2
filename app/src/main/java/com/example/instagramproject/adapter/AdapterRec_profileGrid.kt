@@ -77,7 +77,7 @@ class AdapterRec_profileGrid(var context: Context, var arr: ArrayList<PostModel>
     }
 
     fun notifyData() {
-        notifyDataSetChanged()
+    //    notifyDataSetChanged()
     }
 
 }

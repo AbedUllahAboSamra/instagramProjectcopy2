@@ -14,12 +14,15 @@ import com.example.instagramproject.databinding.ActivityMainBinding
 import com.example.instagramproject.fragment.ChatsFragment
 import com.example.instagramproject.fragment.MainFragment
 import com.example.instagramproject.fragment.MinsCameraFragment
+import com.example.instagramproject.model.FollowingModel
+import com.example.instagramproject.model.MassageModle
+import com.example.instagramproject.model.UserModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
 
     // :: :: ::
     lateinit var binding: ActivityMainBinding
-
 
     // :: :: ::
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        Log.e("ASD", SplachActivity.postsArray.toString())
+
 
         val arr = ArrayList<Fragment>()
         arr.add(MinsCameraFragment())

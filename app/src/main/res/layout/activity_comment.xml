@@ -352,8 +352,8 @@
 
                     <ImageView
                         android:id="@+id/imv_myPhoto"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/images" />
 
@@ -362,14 +362,14 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardBackgroundColor="#CCCCCC"
+                    app:cardBackgroundColor="@color/divider"
                     app:cardCornerRadius="32dp"
                     app:cardElevation="0dp">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="1dp"
+                        android:layout_margin=".4dp"
                         app:cardBackgroundColor="?attr/colorOnPrimary"
                         app:cardCornerRadius="32dp"
                         app:cardElevation="0dp">
@@ -401,17 +401,17 @@
                                 android:layout_weight="1"
                                 android:clickable="true"
                                 android:focusable="true"
-                                app:cardBackgroundColor="@null"
+                                app:cardBackgroundColor="#00000000"
                                 app:rippleColor="?attr/colorOnPrimary">
 
                                 <TextView
                                     android:id="@+id/btn_postComment"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="center"
-                                    android:background="@null"
                                     android:gravity="center"
                                     android:text="Post"
+                                    android:textColor="?attr/colorOnSecondary"
                                     android:textSize="@dimen/_12sdp"
                                     android:textStyle="bold" />
 
