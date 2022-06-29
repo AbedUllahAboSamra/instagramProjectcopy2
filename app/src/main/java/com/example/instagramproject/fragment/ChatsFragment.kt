@@ -36,7 +36,7 @@ class ChatsFragment : Fragment() {
         binding.recChats.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.userName.text = SplachActivity.currentUser!!.userName
-6
+
         return binding.root
     }
 

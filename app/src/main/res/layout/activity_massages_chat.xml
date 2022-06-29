@@ -131,14 +131,18 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_chatMassages"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"
         android:overScrollMode="never"
         android:visibility="visible"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="30dp"
         />
 
 
@@ -152,6 +156,7 @@
         android:layout_marginBottom="20dp"
         app:cardBackgroundColor="?attr/color"
         app:cardCornerRadius="555dp"
+        android:layout_gravity="bottom"
         app:cardElevation="0dp">
 
         <LinearLayout
@@ -162,8 +167,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btn_camera_search"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:clickable="true"
@@ -188,6 +193,8 @@
                 android:layout_weight="2"
                 android:background="@null"
                 android:hint="Massage..."
+                android:textSize="@dimen/_12sdp"
+
                 android:inputType="textImeMultiLine"
                 android:paddingHorizontal="3dp"
                 android:textColor="?attr/colorOnSecondary" />
@@ -222,13 +229,14 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
                 android:text="Send"
                 android:textAllCaps="false"
-                android:textColor="#673EFD"
+                android:textColor="#3D30FD"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -236,5 +244,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+</FrameLayout>
 
 </LinearLayout>

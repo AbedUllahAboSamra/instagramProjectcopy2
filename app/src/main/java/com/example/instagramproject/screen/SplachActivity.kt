@@ -28,7 +28,8 @@ class SplachActivity : AppCompatActivity() {
         setContentView(binding.root)
         uId = getSharedPreferences("My", MODE_PRIVATE).getString("uId", "").toString()
         if (!uId.isEmpty()) {
-            getCurrentUser() }
+            getCurrentUser()
+        }
 
         postsArray = getPosts()
         Handler().postDelayed({

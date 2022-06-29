@@ -35,8 +35,19 @@ class AdapterChatsAdapter(var arr: ArrayList<UserModel>) :
         holder.binding.root.setOnClickListener {
             var i = Intent(context, MassagesChatActivity::class.java)
             i.putExtra("position", position)
+            i.putExtra("id",arr[position].uId)
             context.startActivity(i)
         }
+
+
+
+
+
+
+
+
+
+
     }
 
     override fun getItemCount(): Int {

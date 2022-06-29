@@ -20,9 +20,11 @@ import com.squareup.picasso.Picasso
 class PersonProfileActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityPersonProfileBinding
- companion object {
-     var postsss = ArrayList<PostModel>()
- }
+
+    companion object {
+        var postsss = ArrayList<PostModel>()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonProfileBinding.inflate(layoutInflater)
@@ -107,7 +109,13 @@ class PersonProfileActivity : AppCompatActivity() {
                                 isIamFollow = true
                                 if (isIamFollow) {
                                     binding.tvFollow.text = "UnFollow"
-                                    binding.idToChangeColorOnClick.setCardBackgroundColor(Color.rgb(176, 176, 176))
+                                    binding.idToChangeColorOnClick.setCardBackgroundColor(
+                                        Color.rgb(
+                                            176,
+                                            176,
+                                            176
+                                        )
+                                    )
                                 } else {
                                     binding.tvFollow.text = "Follow"
                                 }
@@ -142,7 +150,7 @@ class PersonProfileActivity : AppCompatActivity() {
                     folloeing = following,
                     posts = posts,
                     pio = it.getString("pio").toString(),
-                    )
+                )
 
                 var followersNum = 0
                 var folloeingNum = 0
@@ -164,7 +172,7 @@ class PersonProfileActivity : AppCompatActivity() {
                         it.type == "p"
                     } as ArrayList<PostModel>
 
-                    var adapter = AdapterRec_profileGrid(this,arr)
+                    var adapter = AdapterRec_profileGrid(this, arr)
                     binding.recGridView.adapter = adapter
 
                     Log.e("ASD", postsss.toString())
@@ -227,7 +235,7 @@ class PersonProfileActivity : AppCompatActivity() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity,arr)
+                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity, arr)
                         binding.recGridView.adapter = adapter
                         adapter.notifyData()
 
@@ -240,7 +248,7 @@ class PersonProfileActivity : AppCompatActivity() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity , arr)
+                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity, arr)
                         binding.recGridView.adapter = adapter
                         adapter.notifyData()
 
@@ -252,7 +260,7 @@ class PersonProfileActivity : AppCompatActivity() {
                         } as ArrayList<PostModel>
 
 
-                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity,arr)
+                        var adapter = AdapterRec_profileGrid(this@PersonProfileActivity, arr)
                         binding.recGridView.adapter = adapter
                         adapter.notifyData()
                     }
@@ -322,9 +330,9 @@ class PersonProfileActivity : AppCompatActivity() {
                     .document(id)
                     .collection("followers")
                     .add(map)
-                    .addOnSuccessListener { ist->
+                    .addOnSuccessListener { ist ->
 //me
-                        doocumentCurrentUserFollowersId=ist.id
+                        doocumentCurrentUserFollowersId = ist.id
                         var smap = HashMap<String, Any>()
                         smap["userId"] = id
                         smap["followDate"] = ""
@@ -338,8 +346,8 @@ class PersonProfileActivity : AppCompatActivity() {
                             .addOnSuccessListener { it ->
                                 doocumentCurrentUserFollowingId = it.id
 
-                                Log.e("ASD","here"+doocumentCurrentUserFollowersId)
-                                Log.e("ASD","me"+doocumentCurrentUserFollowingId)
+                                Log.e("ASD", "here" + doocumentCurrentUserFollowersId)
+                                Log.e("ASD", "me" + doocumentCurrentUserFollowingId)
                             }
                     }.addOnSuccessListener {
 
@@ -351,12 +359,11 @@ class PersonProfileActivity : AppCompatActivity() {
 
         }
         binding.btnMassage.setOnClickListener {
-          var intent = Intent(this,MassagesChatActivity::class.java)
-          intent.putExtra("id",id)
-          intent.putExtra("name",name)
-          intent.putExtra("image",image)
-startActivity(intent)
-
+            var intent = Intent(this, MassagesChatActivity::class.java)
+            intent.putExtra("id", id)
+            intent.putExtra("name", name)
+            intent.putExtra("image", image)
+            startActivity(intent)
         }
     }
 

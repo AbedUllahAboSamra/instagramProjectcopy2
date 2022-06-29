@@ -1,5 +1,6 @@
 package com.example.instagramproject.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,16 @@ class AdapterMassinger(var arr: ArrayList<MassageModle>) :
     }
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
+  //      holder.binding.textMassage.text = arr[position].text
     }
 
     override fun getItemCount(): Int {
-        return arr.size
+        return 52
+    }
+
+    fun notifyData() {
+        Log.e("ASD", "ASDASDASD ${arr.size}")
+
+     //   notifyDataSetChanged()
     }
 }

@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="horizontal"
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tesxtMassage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="?attr/colorOnSecondary"
+        android:textStyle="bold"
+        android:text="ASDASDA"
+        />
+    <TextView
+        android:id="@+id/textdMassage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="?attr/colorOnSecondary"
+        android:textStyle="bold"
+        android:text="ASDASDA"
+        />
 
-
-
-
+<TextView
+    android:id="@+id/textMassage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="20dp"
+    android:textColor="?attr/colorOnSecondary"
+    android:textStyle="bold"
+    android:text="ASDASDA"
+    />
 
 
 </LinearLayout>
