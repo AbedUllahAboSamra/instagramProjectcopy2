@@ -18,6 +18,9 @@ import com.example.instagramproject.model.FollowingModel
 import com.example.instagramproject.model.MassageModle
 import com.example.instagramproject.model.UserModel
 import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,9 +32,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
 
         val arr = ArrayList<Fragment>()
         arr.add(MinsCameraFragment())

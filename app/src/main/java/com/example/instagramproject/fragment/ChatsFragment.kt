@@ -21,22 +21,26 @@ class ChatsFragment : Fragment() {
 
     companion object {
         lateinit var binding: FragmentChatsBinding
-        var chatsOfPositions = ArrayList<ArrayList<MassageModle>>()
+        var chatsOfPositions = ArrayList<ArrayList<MassageModle>?>()
 
     }
 
     var arrChatUsers = ArrayList<UserModel>()
-
+var adapter=AdapterChatsAdapter(arrChatUsers)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentChatsBinding.inflate(layoutInflater)
         getChats()
-        binding.recChats.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.userName.text = SplachActivity.currentUser!!.userName
 
+        binding.recChats.adapter = adapter
+
+                binding.recChats.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        binding.userName.text = SplachActivity.currentUser!!.userName
+           Log.e("ASD",SplachActivity.uId.toString()+"SAD")
         return binding.root
     }
 
@@ -46,11 +50,10 @@ class ChatsFragment : Fragment() {
             .collection("users")
             .document(SplachActivity.uId)
             .collection("chats")
-            .get()
-            .addOnSuccessListener { chatsItems ->
-
-
-                for (i in chatsItems) {
+            .addSnapshotListener { chatsItems, error   ->
+                arrChatUsers.clear()
+                for (i in chatsItems!!) {
+                    Log.e("ASD", i.id.toString() + "ASDDSA")
 
                     FirebaseFirestore.getInstance()
                         .collection("users")
@@ -70,63 +73,58 @@ class ChatsFragment : Fragment() {
                                 folloeing = null,
                                 pio = usr.getString("pio").toString(),
                             )
+Log.e("ASD","Abod ayman "+user.userName)
+if (!arrChatUsers.contains(user)){
+    arrChatUsers.add(user)
 
-                            arrChatUsers.add(user)
+}
+                            adapter.nty()
+
 
                             var arr = ArrayList<MassageModle>()
-                            FirebaseFirestore.getInstance()
-                                .collection("users")
-                                .document(SplachActivity.uId)
-                                .collection("chats")
-                                .document(i.id)
-                                .collection("massages")
-                                .get()
-                                .addOnSuccessListener { massages ->
-                                    Log.e("ASD", "ASD")
-                                    for (massage in massages) {
-                                        var massageModle = MassageModle(
-                                            id = massage.id,
-                                            senderId = massage.getString("senderId")
-                                                .toString(),
-                                            recevierId = massage.getString("recevierId")
-                                                .toString(),
-                                            senfdateTime = massage.getString("senfdateTime")
-                                                .toString(),
-                                            text = massage.getString("text").toString(),
-                                            isSeen = massage.getBoolean("isSeen") == true,
-                                            imageType = massage.getString("imageType")
-                                                .toString(),
-                                            timeSeen = massage.getString("timeSeen")
-                                                .toString(),
-                                            isVoce = massage.getBoolean("isVoce"),
-                                            massageType = massage.getString("massageType")
-                                                .toString(),
-                                            voiceUrl = massage.getString("voiceUrl")
-                                                .toString(),
-                                            imageUrl = massage.getString("imageUrl")
-                                                .toString()
-                                        )
-                                        Log.e("ASD", massageModle.text.toString())
-                                        arr.add(massageModle)
-                                    }
-                                    chatsOfPositions.add(arr)
-                                    Log.e("ASD", chatsOfPositions.size.toString() + "ASD")
+//                            FirebaseFirestore.getInstance()
+//                                .collection("users")
+//                                .document(SplachActivity.uId)
+//                                .collection("chats")
+//                                .document(i.id)
+//                                .collection("massages")
+//                                .orderBy("senfdateTime")
+//                                .get()
+//                                .addOnSuccessListener { massages ->
+//                                    Log.e("ASD", "ASD")
+//                                    for (massage in massages) {
+//                                        var massageModle = MassageModle(
+//                                            id = massage.id,
+//                                            senderId = massage.getString("senderId")
+//                                                .toString(),
+//                                            recevierId = massage.getString("recevierId")
+//                                                .toString(),
+//                                            senfdateTime = massage.getString("senfdateTime")
+//                                                .toString(),
+//                                            text = massage.getString("text").toString(),
+//                                            isSeen = massage.getBoolean("isSeen") == true,
+//                                            imageType = massage.getString("imageType")
+//                                                .toString(),
+//                                            timeSeen = massage.getString("timeSeen")
+//                                                .toString(),
+//                                            isVoce = massage.getBoolean("isVoce"),
+//                                            massageType = massage.getString("massageType")
+//                                                .toString(),
+//                                            voiceUrl = massage.getString("voiceUrl")
+//                                                .toString(),
+//                                            imageUrl = massage.getString("imageUrl")
+//                                                .toString()
+//                                        )
+//                                        Log.e("ASD", massageModle.text.toString())
+//                                        arr.add(massageModle)
+//                                    }
+//                                    chatsOfPositions.add(arr)
+//
+//                                }.addOnFailureListener {
+//                                    Log.e("ASD", it.toString() + "ASDDSA")
+//                                }
 
-                                    Log.e("ASD", arrChatUsers.size.toString() + "arrChatUsers.size")
-                                    Log.e("ASD", chatsItems.size().toString() + "chatsItems.size")
-                                    Log.e(
-                                        "ASD",
-                                        chatsOfPositions.size.toString() + "chatsOfPositions.size"
-                                    )
-
-                                    if (arrChatUsers.size == chatsItems.size() && chatsOfPositions.size == chatsItems.size()) {
-                                        binding.recChats.adapter = AdapterChatsAdapter(arrChatUsers)
-                                    }
-                                }.addOnFailureListener {
-                                    Log.e("ASD", it.toString() + "ASDDSA")
-                                }
-
-
+                            adapter.notifyDataSetChanged()
                         }
 
                     Log.e("ASD", i.id)

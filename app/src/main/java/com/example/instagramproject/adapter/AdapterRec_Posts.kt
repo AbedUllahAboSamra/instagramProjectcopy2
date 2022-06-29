@@ -22,34 +22,42 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
+class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
     RecyclerView.Adapter<AdapterRec_Posts.myViewHoleder>() {
    lateinit var adapter : adapterPagerFilesPick
+    class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-    class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHoleder {
+
         val binding =
             DesignPostItemBinding.inflate(LayoutInflater.from(parent.context), null, false)
+         adapter = adapterPagerFilesPick(context, ArrayList(), null)
+
+        binding.pagerImages.adapter = adapter
+
         return myViewHoleder(binding)
     }
 
+
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
+        adapter.noty()
 
         Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.userImageId)
-
-         adapter = adapterPagerFilesPick(arr[position].postImagesUrl, null)
-        if(position!=0){
-            adapter.noty()
-        }
+        adapter = adapterPagerFilesPick(context,arr[position].postImagesUrl, null)
+        adapter.noty()
         holder.binding.pagerImages.adapter = adapter
+
         holder.binding.tabTablayoutWithViewPager.setupWithViewPager(holder.binding.pagerImages)
 
         var post = arr[position]
         var isLike = false
 
         if (arr[position].comments!!.size > 0) {
-            holder.binding.tvViewNumOfComment.text = "View all ${arr[position].comments!!.size} comments..."
+            holder.binding.tvViewNumOfComment.text =
+                "View all ${arr[position].comments!!.size} comments..."
         } else {
             holder.binding.tvViewNumOfComment.visibility = View.GONE
         }
@@ -82,11 +90,6 @@ class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
         } else {
             holder.binding.tabTablayoutWithViewPager.visibility = View.VISIBLE
         }
-
-
-
-
-
 
 
         // initlzation post Item
@@ -196,12 +199,12 @@ class AdapterRec_Posts(var context :Context , var arr: ArrayList<PostModel>) :
 
 
         holder.binding.btnClickToOpenPersonProfile.setOnClickListener {
-Log
-    .e("ASD","Clicked")
+            Log
+                .e("ASD", "Clicked")
             if (post.posterId == SplachActivity.uId) {
-                Log.e("ASD","Clickedtrue")
+                Log.e("ASD", "Clickedtrue")
             } else {
-                Log.e("ASD","Clickedfalse")
+                Log.e("ASD", "Clickedfalse")
                 var i = Intent(context, PersonProfileActivity::class.java)
                 i.putExtra("personId", post.posterId)
                 i.putExtra("image", post.posterImageUrl)

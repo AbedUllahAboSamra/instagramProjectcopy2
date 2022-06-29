@@ -41,11 +41,9 @@ class FirstCreatePostActivity : AppCompatActivity() {
             PICK_IMAGE_MULTIPLE
         )
 
-        binding.vPagerView.pageMargin = 15
-        binding.vPagerView.setPadding(50, 0, 50, 0);
+         binding.vPagerView.setPadding(50, 0, 50, 0);
         binding.vPagerView.setClipToPadding(false)
-        binding.vPagerView.setPageMargin(25)
-    }
+        }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -84,7 +82,7 @@ class FirstCreatePostActivity : AppCompatActivity() {
             binding.btnNext.visibility = View.VISIBLE
             binding.vPagerView.visibility = View.VISIBLE
 
-            var adapter = adapterPagerFilesPick( null,mArrayUri)
+            var adapter = adapterPagerFilesPick( this,null,mArrayUri)
             binding.vPagerView.adapter = adapter
         } else {
             binding.vPagerView.visibility = View.GONE

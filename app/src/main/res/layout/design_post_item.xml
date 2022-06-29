@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/frameLayout"
     android:layout_width="wrap_content"
@@ -105,9 +105,9 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager_images"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_350sdp"
-            android:overScrollMode="never"
-            android:visibility="visible" />
+            android:layout_height="@dimen/_360sdp"
+            android:visibility="visible"
+            />
 
 
         <LinearLayout
@@ -213,4 +213,4 @@
             android:textSize="@dimen/_10sdp" />
     </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>

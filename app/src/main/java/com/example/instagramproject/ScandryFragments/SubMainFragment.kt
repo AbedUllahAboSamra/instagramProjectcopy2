@@ -56,13 +56,13 @@ class SubMainFragment : Fragment() {
 // on scroled
       binding.recPosts.viewTreeObserver.addOnScrollChangedListener {
       try {
-         if (adapterPagerFilesPick.amp.isPlaying == true) {
-             Handler().postDelayed({
-
-                 adapterPagerFilesPick.amp.pause()
-
-             }, 100)
-         }
+//         if (adapterPagerFilesPick.amp.isPlaying == true) {
+//             Handler().postDelayed({
+//
+//                 adapterPagerFilesPick.amp.pause()
+//
+//             }, 100)
+//         }
      } catch (s: Exception) {
          Log.e("ASD", s.toString())
      }

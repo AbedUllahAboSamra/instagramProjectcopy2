@@ -40,106 +40,102 @@ class MassagesChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMassagesChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var position = intent.getIntExtra("position", -1)
         id = intent.getStringExtra("id").toString()
         var name = intent.getStringExtra("name")
         var image = intent.getStringExtra("image")
 
         getMassages()
+
         adapter = AdapterMassinger(massagesInChat)
         binding.recChatMassages.layoutManager = LinearLayoutManager(this)
         binding.recChatMassages.adapter = adapter
 //  binding.imgChasdatMassages
-        if (position != -1) {
-            var arrayMassages = ChatsFragment.chatsOfPositions[position]
-        } else {
-            binding.chatUserName.text = name
-            Picasso.with(this).load(image).into(binding.userImageId)
-            FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(id!!)
-                .get()
-                .addOnSuccessListener { it ->
 
-                    var following = ArrayList<FollowingModel>()
-                    var followers = ArrayList<FollowingModel>()
-                    var posts = ArrayList<String>()
+        binding.chatUserName.text = name
+        Picasso.with(this).load(image).into(binding.userImageId)
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(id!!)
+            .get()
+            .addOnSuccessListener { it ->
+
+                var following = ArrayList<FollowingModel>()
+                var followers = ArrayList<FollowingModel>()
+                var posts = ArrayList<String>()
 
 //get get  following following
-                    FirebaseFirestore
-                        .getInstance()
-                        .collection("users")
-                        .document(id)
-                        .collection("following")
-                        .get()
-                        .addOnSuccessListener { ites ->
+                FirebaseFirestore
+                    .getInstance()
+                    .collection("users")
+                    .document(id)
+                    .collection("following")
+                    .get()
+                    .addOnSuccessListener { ites ->
 
-                            for (i in ites) {
-                                var followingModel = FollowingModel(
-                                    userId = i.getString("userId").toString(),
-                                    followDate = i.getString("followDate").toString(),
-                                    isFollow = i.getBoolean("isFollow") == true
-                                )
-
-                                following.add(followingModel)
-                            }
-
+                        for (i in ites) {
+                            var followingModel = FollowingModel(
+                                userId = i.getString("userId").toString(),
+                                followDate = i.getString("followDate").toString(),
+                                isFollow = i.getBoolean("isFollow") == true
+                            )
+                            following.add(followingModel)
                         }
+                    }
 
 
 //followers followers followers followers
-                    FirebaseFirestore
-                        .getInstance()
-                        .collection("users")
-                        .document(id)
-                        .collection("followers")
-                        .get()
-                        .addOnSuccessListener { ites ->
-                            for (i in ites) {
-                                var followingModel = FollowingModel(
-                                    userId = i.getString("userId").toString(),
-                                    followDate = i.getString("followDate").toString(),
-                                    isFollow = i.getBoolean("isFollow") == true
-                                )
-                                if (followingModel.userId == SplachActivity.uId) {
-                                    //      doocumentCurrentUserFollowersId = i.id
-                                }
-
-                                followers.add(followingModel)
+                FirebaseFirestore
+                    .getInstance()
+                    .collection("users")
+                    .document(id)
+                    .collection("followers")
+                    .get()
+                    .addOnSuccessListener { ites ->
+                        for (i in ites) {
+                            var followingModel = FollowingModel(
+                                userId = i.getString("userId").toString(),
+                                followDate = i.getString("followDate").toString(),
+                                isFollow = i.getBoolean("isFollow") == true
+                            )
+                            if (followingModel.userId == SplachActivity.uId) {
+                                //      doocumentCurrentUserFollowersId = i.id
                             }
 
+                            followers.add(followingModel)
                         }
+
+                    }
 
 ///posts posts posts
-                    FirebaseFirestore.getInstance()
-                        .collection("users")
-                        .document(id)
-                        .collection("posts")
-                        .get()
-                        .addOnSuccessListener { postsss ->
-                            for (i in postsss) {
-                                posts.add(i.id)
-                            }
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(id)
+                    .collection("posts")
+                    .get()
+                    .addOnSuccessListener { postsss ->
+                        for (i in postsss) {
+                            posts.add(i.id)
                         }
+                    }
 
 
-                    var user = UserModel(
-                        uId = id,
-                        userName = it.getString("userName").toString(),
-                        imageUrl = it.getString("imageUrl").toString(),
-                        accountName = it.getString("accountName").toString(),
-                        email = it.getString("email").toString(),
-                        password = it.getString("password").toString(),
-                        followers = followers,
-                        folloeing = following,
-                        posts = posts,
-                        pio = it.getString("pio").toString(),
-                    )
-                    binding.tvAccountName.text = user.accountName
-                }.addOnFailureListener {
-                }
+                var user = UserModel(
+                    uId = id,
+                    userName = it.getString("userName").toString(),
+                    imageUrl = it.getString("imageUrl").toString(),
+                    accountName = it.getString("accountName").toString(),
+                    email = it.getString("email").toString(),
+                    password = it.getString("password").toString(),
+                    followers = followers,
+                    folloeing = following,
+                    posts = posts,
+                    pio = it.getString("pio").toString(),
+                )
+                binding.tvAccountName.text = user.accountName
+            }.addOnFailureListener {
+            }
 
-        }
+
 
 
 
@@ -178,10 +174,11 @@ class MassagesChatActivity : AppCompatActivity() {
             .collection("users")
             .document(SplachActivity.uId)
             .collection("chats")
-            .document(id!!)
+            .document(id)
             .collection("massages")
             .orderBy("senfdateTime")
             .addSnapshotListener { value, error ->
+                massagesInChat.clear()
                 if (value!!.size() > 0) {
                     Log.e("ASD", value.size().toString() + "ASDASD")
                     for (massage in value) {
@@ -207,9 +204,10 @@ class MassagesChatActivity : AppCompatActivity() {
                             imageUrl = massage.getString("imageUrl")
                                 .toString()
                         )
+
                         if (!massagesInChat.contains(massageModle)) {
-                            massagesInChat.add(massageModle)
-                            adapter.notifyData()
+                                    massagesInChat.add(massageModle)
+                                    adapter.notifyData()
                         }
 
 
@@ -236,6 +234,13 @@ class MassagesChatActivity : AppCompatActivity() {
         massageMap["voiceUrl"] = ""
         massageMap["massageType"] = "t"
         massageMap["isVoce"] = false
+
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(SplachActivity.uId)
+            .collection("chats")
+            .document(id)
+            .set(HashMap<String, Any>())
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(SplachActivity.uId)
@@ -250,8 +255,20 @@ class MassagesChatActivity : AppCompatActivity() {
             .document(id)
             .collection("chats")
             .document(SplachActivity.uId)
+            .set(HashMap<String, Any>())
+
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(id)
+            .collection("chats")
+            .document(SplachActivity.uId)
             .collection("massages")
             .add(massageMap)
 
+    }
+
+    override fun onStop() {
+        Log.e("ASD", "OnStop")
+        super.onStop()
     }
 }

@@ -1,23 +1,35 @@
 package com.example.instagramproject.adapter
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.MediaController
 import androidx.core.app.NotificationCompat
 import androidx.core.view.updateLayoutParams
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.example.instagramproject.R
 import com.example.instagramproject.databinding.DesignImageOrVedioBinding
+import com.example.instagramproject.databinding.DesignMassagesForAdapterBinding
 import com.squareup.picasso.Picasso
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: ArrayList<Uri>?) :
+class adapterPagerFilesPick(var contex : Context, var arrayFromIInternt: ArrayList<String>?, var arr: ArrayList<Uri>?) :
     PagerAdapter() {
+    fun noty() {
+        notifyDataSetChanged()
+    }
+init {
+    notifyDataSetChanged()
 
+}
     override fun getCount(): Int {
         if (arr != null) {
             return arr!!.size
@@ -35,33 +47,25 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        Log.e("ASD", "ASDASDASD$position")
         var binding =
-            DesignImageOrVedioBinding.inflate(LayoutInflater.from(container.context), null, false)
+            DesignImageOrVedioBinding.inflate(LayoutInflater.from(contex), null, false)
         if (arr != null) {
             if (arr!![position].toString().contains("video")) {
                 val mediaController = MediaController(container.context)
-                //      mediaController.setAnchorView(binding.VideoView)
 
+                //      mediaController.setAnchorView(binding.VideoView)
 
                 binding.imageView.visibility = View.GONE
                 binding.LayoutFrameVideoView.visibility = View.VISIBLE
                 binding.VideoView.setVideoURI(arr!![position])
                 binding.VideoView.requestFocus()
-
-
 //                binding.VideoView.setMediaController(mediaController)
-
             } else {
                 binding.LayoutFrameVideoView.visibility = View.GONE
                 binding.imageView.visibility = View.VISIBLE
-
                 binding.imageView.setImageURI(arr!![position])
             }
-
         } else {
-
-
             if (arrayFromIInternt!![position].contains("video")) {
 
 
@@ -73,7 +77,7 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
 
                 binding.VideoView.setOnPreparedListener { mp ->
                     binding.VideoView.start()
-                    amp = mp
+//                    amp = mp
                     mp.setVolume(0f, 0f)
 
                     binding.imgVolume.setImageResource(R.drawable.ic_baseline_volume_off_24)
@@ -106,12 +110,13 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
                 }
 
             } else {
-
                 // internet
+                Log.e("ASD","ASDASDimage")
                 binding.LayoutFrameVideoView.visibility = View.GONE
                 binding.imageView.visibility = View.VISIBLE
 
-                Picasso.with(container.context)
+                Picasso
+                    .with(contex)
                     .load(arrayFromIInternt!![position])
                     .into(binding.imageView)
             }
@@ -123,11 +128,5 @@ class adapterPagerFilesPick(var arrayFromIInternt: ArrayList<String>?, var arr: 
 
     }
 
-    companion object {
-        var amp = MediaPlayer()
-    }
 
-    fun noty() {
-        notifyDataSetChanged()
-    }
 }

@@ -186,6 +186,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+
             <EditText
                 android:id="@+id/edt_massage"
                 android:layout_width="0dp"
@@ -194,7 +195,6 @@
                 android:background="@null"
                 android:hint="Massage..."
                 android:textSize="@dimen/_12sdp"
-
                 android:inputType="textImeMultiLine"
                 android:paddingHorizontal="3dp"
                 android:textColor="?attr/colorOnSecondary" />
