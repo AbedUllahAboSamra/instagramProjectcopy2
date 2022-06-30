@@ -40,7 +40,7 @@ class CommentPostAdapter(var postId: String, var arr: ArrayList<CommentModel>) :
 
 
 
-        Picasso.with(context).load(arr[position].commenterImageUrl)
+        Picasso.get().load(arr[position].commenterImageUrl)
             .into(holder.binding.imvCommenter)
         holder.binding.tvCommentContent.text = arr[position].commentContent
         holder.binding.tvCommenterName.text = arr[position].commenterName

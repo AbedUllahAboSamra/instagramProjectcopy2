@@ -52,7 +52,7 @@ class MassagesChatActivity : AppCompatActivity() {
 //  binding.imgChasdatMassages
 
         binding.chatUserName.text = name
-        Picasso.with(this).load(image).into(binding.userImageId)
+        Picasso.get().load(image).into(binding.userImageId)
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(id!!)

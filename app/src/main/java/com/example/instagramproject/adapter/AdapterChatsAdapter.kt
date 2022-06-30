@@ -35,7 +35,7 @@ class AdapterChatsAdapter(var arr: ArrayList<UserModel>) :
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
 //        var msg =
 //            ChatsFragment.chatsOfPositions[position]?.get(ChatsFragment.chatsOfPositions[position]!!.size - 1)
-        Picasso.with(context).load(arr[position].imageUrl).into(holder.binding.userImageId)
+        Picasso.get().load(arr[position].imageUrl).into(holder.binding.userImageId)
         holder.binding.chatUserName.text = arr[position].userName
 
         val format = DateTimeFormatter.ofPattern("yyyy.MM.dd 'at' h:mm a")

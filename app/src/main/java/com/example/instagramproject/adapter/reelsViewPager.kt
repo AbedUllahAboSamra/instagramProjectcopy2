@@ -53,8 +53,8 @@ class reelsViewPager(var arr: ArrayList<PostModel>, var context: Activity) : Pag
         var binding = DesignReelItemBinding.inflate(LayoutInflater.from(context), null, false)
 
         binding.progressBar.visibility = View.VISIBLE
-        Picasso.with(context).load(arr[position].posterImageUrl).into(binding.posterImage)
-        Picasso.with(context).load(arr[position].posterImageUrl)
+        Picasso.get().load(arr[position].posterImageUrl).into(binding.posterImage)
+        Picasso.get().load(arr[position].posterImageUrl)
             .into(binding.posterImageToSong)
 
         binding.ReelVedio.setVideoURI(Uri.parse(arr[position].postImagesUrl!![0]))

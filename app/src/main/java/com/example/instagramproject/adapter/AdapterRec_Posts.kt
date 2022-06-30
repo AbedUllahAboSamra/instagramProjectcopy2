@@ -42,7 +42,7 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
         adapter.noty()
 
-        Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.userImageId)
+        Picasso.get().load(arr[position].posterImageUrl).into(holder.binding.userImageId)
         adapter = adapterPagerFilesPick(context,arr[position].postImagesUrl, null)
         adapter.noty()
         holder.binding.pagerImages.adapter = adapter

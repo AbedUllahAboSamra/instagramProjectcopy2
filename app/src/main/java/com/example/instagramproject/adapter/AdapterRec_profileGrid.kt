@@ -48,7 +48,7 @@ class AdapterRec_profileGrid(var context: Context, var arr: ArrayList<PostModel>
                 holder.binding.PostVedio.setVideoURI(Uri.parse(arr[position].postImagesUrl!![0]))
             } else {
                 holder.binding.PostVedio.visibility = View.GONE
-                Picasso.with(context).load(Uri.parse(arr[position].postImagesUrl!![0]))
+                Picasso.get().load(Uri.parse(arr[position].postImagesUrl!![0]))
                     .into(holder.binding.postImageView)
             }
 

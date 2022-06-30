@@ -32,12 +32,13 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
         context = parent.context
         var binding = DesignReelItemBinding.inflate(LayoutInflater.from(parent.context))
         return myViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: myViewHolder, position: Int) {
         holder.binding.progressBar.visibility = View.VISIBLE
-        Picasso.with(context).load(arr[position].posterImageUrl).into(holder.binding.posterImage)
-        Picasso.with(context).load(arr[position].posterImageUrl)
+        Picasso.get().load(arr[position].posterImageUrl).into(holder.binding.posterImage)
+        Picasso.get().load(arr[position].posterImageUrl)
             .into(holder.binding.posterImageToSong)
 
         holder.binding.ReelVedio.setVideoURI(Uri.parse(arr[position].postImagesUrl!![0]))

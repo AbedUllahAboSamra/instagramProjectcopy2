@@ -13,6 +13,7 @@ import com.example.instagramproject.adapter.AdapterRec_Posts
 import com.example.instagramproject.adapter.AdapterRec_Story
 import com.example.instagramproject.adapter.adapterPagerFilesPick
 import com.example.instagramproject.databinding.FragmentSubMainBinding
+import com.example.instagramproject.model.UserModel
 import com.example.instagramproject.screen.FirstCreatePostActivity
 import com.example.instagramproject.screen.MainActivity
 import com.example.instagramproject.screen.SplachActivity
@@ -40,22 +41,26 @@ class SubMainFragment : Fragment() {
         array.add("")
         array.add("")
 
+        var arr = ArrayList<UserModel>()
+
+
+
         // story Recycle view Adapter
         binding.recStoryItems.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        var storyAdapter = AdapterRec_Story(requireContext(), array)
+        var storyAdapter = AdapterRec_Story(requireContext(), arr)
         binding.recStoryItems.adapter = storyAdapter
 
         // posts Recycle view Adapter
 
-        var postsAdapter = AdapterRec_Posts(requireContext(),SplachActivity.postsArray)
+        var postsAdapter = AdapterRec_Posts(requireContext(), SplachActivity.postsArray)
         var layManeger = LinearLayoutManager(requireContext())
         binding.recPosts.layoutManager = layManeger
         binding.recPosts.adapter = postsAdapter
 
 // on scroled
-      binding.recPosts.viewTreeObserver.addOnScrollChangedListener {
-      try {
+        binding.recPosts.viewTreeObserver.addOnScrollChangedListener {
+            try {
 //         if (adapterPagerFilesPick.amp.isPlaying == true) {
 //             Handler().postDelayed({
 //
@@ -63,11 +68,11 @@ class SubMainFragment : Fragment() {
 //
 //             }, 100)
 //         }
-     } catch (s: Exception) {
-         Log.e("ASD", s.toString())
-     }
+            } catch (s: Exception) {
+                Log.e("ASD", s.toString())
+            }
 
- }
+        }
 
         return binding.root
     }

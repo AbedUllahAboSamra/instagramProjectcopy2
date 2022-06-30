@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
             binding.tvPio.text = user.pio
         }
 
-        Picasso.with(requireContext()).load(user.imageUrl).into(binding.userImageId)
+        Picasso.get().load(user.imageUrl).into(binding.userImageId)
 
 
         var arr = posts.filter { it ->

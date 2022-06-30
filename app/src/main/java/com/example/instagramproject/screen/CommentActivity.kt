@@ -211,7 +211,7 @@ class CommentActivity : AppCompatActivity() {
 
             binding.tvPosterName.text = postItem.posterName
             binding.tvPosteContent.text = postItem.postText.toString()
-            Picasso.with(this).load(postItem.posterImageUrl).into(binding.imvMyPhoto)
+            Picasso.get().load(postItem.posterImageUrl).into(binding.imvMyPhoto)
 
 
             var adapter = CommentPostAdapter(postId, arrayComments!!)

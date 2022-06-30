@@ -116,7 +116,7 @@ init {
                 binding.imageView.visibility = View.VISIBLE
 
                 Picasso
-                    .with(contex)
+                    .get()
                     .load(arrayFromIInternt!![position])
                     .into(binding.imageView)
             }

@@ -39,7 +39,7 @@ class PersonProfileActivity : AppCompatActivity() {
 
         var image = intent.getStringExtra("image")
         var name = intent.getStringExtra("name")
-        Picasso.with(this)
+        Picasso.get()
             .load(image)
             .into(binding.userImageId)
 
