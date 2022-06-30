@@ -40,6 +40,9 @@ class MainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         //sub tab layout
+        val nightModeFlags =
+            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
         binding.tabTapLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab!!.position) {
@@ -47,8 +50,6 @@ class MainFragment : Fragment() {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, SubMainFragment())
                             .commit()
-                        val nightModeFlags =
-                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
                         when (nightModeFlags) {
                             Configuration.UI_MODE_NIGHT_YES -> {
@@ -67,8 +68,6 @@ class MainFragment : Fragment() {
                             .replace(R.id.con_FragmentContainer, SearchFragment())
                             .commit()
 
-                        val nightModeFlags =
-                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
                         when (nightModeFlags) {
                             Configuration.UI_MODE_NIGHT_YES -> {
@@ -91,8 +90,6 @@ class MainFragment : Fragment() {
                             .replace(R.id.con_FragmentContainer, RealsFragment())
                             .commit()
 
-                        val nightModeFlags =
-                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
                         when (nightModeFlags) {
                             Configuration.UI_MODE_NIGHT_YES -> {
@@ -112,8 +109,6 @@ class MainFragment : Fragment() {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, NotficationFragment())
                             .commit()
-                        val nightModeFlags =
-                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
                         when (nightModeFlags) {
                             Configuration.UI_MODE_NIGHT_YES -> {
@@ -131,8 +126,6 @@ class MainFragment : Fragment() {
                         requireActivity().supportFragmentManager.beginTransaction()
                             .replace(R.id.con_FragmentContainer, ProfileFragment())
                             .commit()
-                        val nightModeFlags =
-                            view!!.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
                         when (nightModeFlags) {
                             Configuration.UI_MODE_NIGHT_YES -> {

@@ -25,10 +25,7 @@ import kotlin.collections.HashMap
 class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
     RecyclerView.Adapter<AdapterRec_Posts.myViewHoleder>() {
    lateinit var adapter : adapterPagerFilesPick
-    class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root){
-
-
-    }
+    class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHoleder {
 
