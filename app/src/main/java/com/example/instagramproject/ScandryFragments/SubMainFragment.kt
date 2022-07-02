@@ -14,6 +14,7 @@ import com.example.instagramproject.adapter.AdapterRec_Story
 import com.example.instagramproject.adapter.adapterPagerFilesPick
 import com.example.instagramproject.databinding.FragmentSubMainBinding
 import com.example.instagramproject.model.UserModel
+import com.example.instagramproject.model.userStoryModle
 import com.example.instagramproject.screen.FirstCreatePostActivity
 import com.example.instagramproject.screen.MainActivity
 import com.example.instagramproject.screen.SplachActivity
@@ -22,33 +23,41 @@ class SubMainFragment : Fragment() {
 
     lateinit var binding: FragmentSubMainBinding
 
+    companion object {
+        var users = ArrayList<userStoryModle>()
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSubMainBinding.inflate(layoutInflater)
-
+        users.clear()
         (requireActivity() as? MainActivity)?.setSupportActionBar(requireActivity().findViewById(R.id.to_ToolBar))
         setHasOptionsMenu(true)
         binding.toToolBar.inflateMenu(R.menu.tool_bar_menu)
+
         //  requireActivity().registerForContextMenu(requireActivity().findViewById(R.id.meny))
 
-        var array = ArrayList<String>()
-        array.add("")
-        array.add("")
-        array.add("")
-        array.add("")
-        array.add("")
-        array.add("")
 
-        var arr = ArrayList<UserModel>()
+        for (i in SplachActivity.storyes) {
 
+            var us = userStoryModle(
+                id = i.senderID,
+                name = i.senderImageName,
+                imageUrl = i.senderImageUrl
+            )
+            if (!users.contains(us) && us.id != SplachActivity.uId) {
+                users.add(us)
+            }
 
+        }
 
         // story Recycle view Adapter
         binding.recStoryItems.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        var storyAdapter = AdapterRec_Story(requireContext(), arr)
+        var storyAdapter = AdapterRec_Story(requireContext(), users)
         binding.recStoryItems.adapter = storyAdapter
 
         // posts Recycle view Adapter

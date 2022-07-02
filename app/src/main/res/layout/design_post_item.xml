@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
+                android:id="@+id/frame"
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
                 android:layout_marginHorizontal="8dp"
@@ -35,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
+                    app:cardElevation="0dp"
                     app:cardBackgroundColor="?attr/colorOnPrimary"
                     app:cardCornerRadius="5000dp">
 
@@ -43,6 +45,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_margin="3dp"
+                        app:cardElevation="0dp"
                         app:cardCornerRadius="5000dp">
 
                         <ImageView
@@ -50,9 +53,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/images">
-
-                        </ImageView>
+/>
 
                     </com.google.android.material.card.MaterialCardView>
 
@@ -71,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Abed Ullah Abo "
+                    android:text=""
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -81,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Abed Ullah Abo "
+                    android:text=""
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="@dimen/_10sdp" />
 
@@ -179,7 +180,7 @@
                 android:id="@+id/tv_PosterName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="adsasd"
+                android:text=" "
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="@dimen/_11sdp"
                 android:textStyle="bold" />
@@ -188,7 +189,7 @@
                 android:id="@+id/tv_PostText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="                adsaasd asd asd asd asd asd asd asd asd asd asd asd asd sd"
+                android:text=" "
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="@dimen/_11sdp" />
         </FrameLayout>
@@ -199,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="8dp"
-            android:text="View 1 Comment"
+            android:text=" "
             android:textSize="@dimen/_11sdp" />
 
         <TextView

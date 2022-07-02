@@ -5,11 +5,13 @@
     android:layout_height="wrap_content">
 
     <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="@dimen/_55sdp"
         android:layout_height="@dimen/_55sdp"
         android:layout_marginHorizontal="8dp"
         android:background="@drawable/story_background_gradiant"
-        app:cardCornerRadius="5000dp">
+        app:cardCornerRadius="5000dp"
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

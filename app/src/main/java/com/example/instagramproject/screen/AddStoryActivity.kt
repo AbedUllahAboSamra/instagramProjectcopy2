@@ -48,6 +48,7 @@ import ja.burhanrashid52.photoeditor.shape.ShapeType
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -312,7 +313,9 @@ class AddStoryActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickList
                                         childref.downloadUrl.addOnSuccessListener { it ->
 
                                             var map = HashMap<String, Any>()
-                                            map["sendTime"] = ""
+                                            map["sendTime"] = SimpleDateFormat("yyyy.MM.dd 'at' h:mm a", Locale.getDefault()).format(
+                                                Date()
+                                            )
                                             map["imageOrVedioUrl"] = it.toString()
                                             map["senderID"] = SplachActivity.uId
                                             map["senderImageUrl"] =

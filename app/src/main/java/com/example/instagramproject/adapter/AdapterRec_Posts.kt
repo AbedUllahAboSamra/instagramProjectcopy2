@@ -23,15 +23,17 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
+
     RecyclerView.Adapter<AdapterRec_Posts.myViewHoleder>() {
-   lateinit var adapter : adapterPagerFilesPick
+    lateinit var adapter: adapterPagerFilesPick
+
     class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHoleder {
 
         val binding =
             DesignPostItemBinding.inflate(LayoutInflater.from(parent.context), null, false)
-         adapter = adapterPagerFilesPick(context, ArrayList(), null)
+        adapter = adapterPagerFilesPick(context, ArrayList(), null)
 
         binding.pagerImages.adapter = adapter
 
@@ -40,10 +42,11 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
 
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
+        holder.binding.frame.setBackgroundResource(R.drawable.story_background_gradiant)
         adapter.noty()
 
         Picasso.get().load(arr[position].posterImageUrl).into(holder.binding.userImageId)
-        adapter = adapterPagerFilesPick(context,arr[position].postImagesUrl, null)
+        adapter = adapterPagerFilesPick(context, arr[position].postImagesUrl, null)
         adapter.noty()
         holder.binding.pagerImages.adapter = adapter
 
@@ -51,6 +54,22 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
         var post = arr[position]
         var isLike = false
+
+        if (arr[position].posterId==SplachActivity.uId) {
+            holder.binding.frame.background = null
+        }
+        if (SplachActivity.storyes.size != 0) {
+
+            SplachActivity.storyes.forEach { s ->
+                if (s.senderID == arr[position].posterId) {
+                    holder.binding.frame.isSelected = s.seenIds.contains(SplachActivity.uId)
+                } else {
+                    holder.binding.frame.background = null
+                }
+            }
+        } else {
+            holder.binding.frame.background = null
+        }
 
         if (arr[position].comments!!.size > 0) {
             holder.binding.tvViewNumOfComment.text =

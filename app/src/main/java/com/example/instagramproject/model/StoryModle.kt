@@ -8,7 +8,6 @@ data class StoryModle(
     var senderID: String,
     var senderImageUrl: String,
     var senderImageName: String,
-    var hiddenFrom: ArrayList<String>,
     var hilightName: String,
-    var isDeleted:Boolean
+
 )

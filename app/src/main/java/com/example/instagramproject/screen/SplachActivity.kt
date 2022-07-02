@@ -10,6 +10,12 @@ import com.example.instagramproject.databinding.ActivitySplachBinding
 import com.example.instagramproject.fragment.ChatsFragment
 import com.example.instagramproject.model.*
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SplachActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplachBinding
@@ -18,8 +24,7 @@ class SplachActivity : AppCompatActivity() {
         var uId = ""
         var postsArray = ArrayList<PostModel>()
         var currentUser: UserModel? = null
-
-
+        var storyes = ArrayList<StoryModle>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,13 +32,10 @@ class SplachActivity : AppCompatActivity() {
         binding = ActivitySplachBinding.inflate(layoutInflater)
         setContentView(binding.root)
         uId = getSharedPreferences("My", MODE_PRIVATE).getString("uId", "").toString()
-
-
+        getStories()
         postsArray = getPosts()
         Handler().postDelayed({
             if (uId.isEmpty()) {
-
-                Log.e("ASD", "ASDsadasd" + postsArray.size.toString())
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
@@ -84,9 +86,8 @@ class SplachActivity : AppCompatActivity() {
                                             commentLikesArray.add(commentLike)
                                         }
 
-                                        Log.e("ASD", "Comment Like Success")
                                     }.addOnFailureListener {
-                                        Log.e("ASD", "Comment Like Fail00")
+
                                     }
 
 
@@ -101,11 +102,9 @@ class SplachActivity : AppCompatActivity() {
                                 )
                                 commentsArray.add((commentModel))
                             }
-                            Log.e("ASD", "get Comment Success")
 
-                        }.addOnFailureListener {
-                            Log.e("ASD", "get Comment Fail")
-
+                        }
+                        .addOnFailureListener {
                         }
 //get all Likes
 
@@ -128,10 +127,8 @@ class SplachActivity : AppCompatActivity() {
                                 postLikesArray.add(likeitem)
 
                             }
-                            Log.e("ASD", "get likes Success")
 
                         }.addOnFailureListener {
-                            Log.e("ASD", "get likes Fail")
 
                         }
 
@@ -149,10 +146,8 @@ class SplachActivity : AppCompatActivity() {
                                 }
                             }
 
-                            Log.e("ASD", "get peopleIdTags Success ")
                         }
                         .addOnFailureListener {
-                            Log.e("ASD", "get peopleIdTags Failure ")
                         }
 
                     // get all images
@@ -169,10 +164,8 @@ class SplachActivity : AppCompatActivity() {
                                 }
                             }
 
-                            Log.e("ASD", "get postImagesUrl Success ")
                         }
                         .addOnFailureListener {
-                            Log.e("ASD", "get postImagesUrl Failure ")
                         }
 
 
@@ -197,7 +190,6 @@ class SplachActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener { _ ->
-                Log.e("ASD", "get all post Failure")
             }
 
         return arr
@@ -219,7 +211,6 @@ class SplachActivity : AppCompatActivity() {
                     .collection("following")
                     .get()
                     .addOnSuccessListener { ites ->
-                        Log.e("ASD", "followingusersaddOnSuccessListener")
 
                         for (i in ites) {
                             var followingModel = FollowingModel(
@@ -267,7 +258,6 @@ class SplachActivity : AppCompatActivity() {
                     .collection("posts")
                     .get()
                     .addOnSuccessListener { postsss ->
-                        Log.e("ASD", "userspostsaddOnSuccessListener")
 
                         for (i in postsss) {
                             posts.add(i.id)
@@ -298,5 +288,51 @@ class SplachActivity : AppCompatActivity() {
             }
     }
 
+    fun getStories() {
+        val format = DateTimeFormatter.ofPattern("yyyy.MM.dd 'at' h:mm a")
+
+        FirebaseFirestore.getInstance()
+            .collection("story")
+            .addSnapshotListener { value, error ->
+                Log.e("ASD", " ${value!!.size()} value")
+
+                for (i in value!!) {
+                    var seensArr = ArrayList<String>()
+                    FirebaseFirestore.getInstance()
+                        .collection("story")
+                        .document(i.id)
+                        .collection("seenIds")
+                        .get()
+                        .addOnSuccessListener { its
+                            ->
+
+                            for (it in its) {
+                                seensArr.add(it.id)
+                            }
+                        }
+
+
+                    var story = StoryModle(
+                        id = i.id,
+                        seenIds = seensArr,
+                        sendTime = i.getString("sendTime").toString(),
+                        imageOrVedioUrl = i.getString("imageOrVedioUrl").toString(),
+                        senderID = i.getString("senderID").toString(),
+                        senderImageUrl = i.getString("senderImageUrl").toString(),
+                        senderImageName = i.getString("senderImageName").toString(),
+                        hilightName = i.getString("hilightName").toString(),
+                    )
+                    storyes.add(
+                        story
+                    )
+
+
+                }
+
+
+            }
+
+
+    }
 
 }
