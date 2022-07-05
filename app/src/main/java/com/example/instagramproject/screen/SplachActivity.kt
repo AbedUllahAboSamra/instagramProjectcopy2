@@ -32,6 +32,7 @@ class SplachActivity : AppCompatActivity() {
         binding = ActivitySplachBinding.inflate(layoutInflater)
         setContentView(binding.root)
         uId = getSharedPreferences("My", MODE_PRIVATE).getString("uId", "").toString()
+
         getStories()
         postsArray = getPosts()
         Handler().postDelayed({
@@ -202,6 +203,7 @@ class SplachActivity : AppCompatActivity() {
 
                 var following = ArrayList<FollowingModel>()
                 var followers = ArrayList<FollowingModel>()
+                var sendernotficationsArrr = ArrayList<NotficationModle>()
                 var posts = ArrayList<String>()
 
 
@@ -266,6 +268,28 @@ class SplachActivity : AppCompatActivity() {
                     }
 
 
+                // sender notfications notfications notfications
+                FirebaseFirestore.getInstance().collection("users")
+                    .document(SplachActivity.uId)
+                    .collection("senderNotification")
+                    .get()
+                    .addOnSuccessListener { nofs ->
+
+                        for (i in nofs) {
+                            var notficationModle = NotficationModle(
+                                id = i.id,
+                                type = i.getString("type").toString(),
+                                postId = i.getString("postId").toString(),
+                                personName = i.getString("personName").toString(),
+                                personId = i.getString("personId").toString(),
+                                day = i.getString("day").toString(),
+                                personImage = i.getString("personImage").toString(),
+                                postImage = i.getString("postImage").toString(),
+                            )
+                            sendernotficationsArrr.add(notficationModle)
+                        }
+                    }
+
 
                 currentUser = UserModel(
                     uId = uId,
@@ -278,8 +302,10 @@ class SplachActivity : AppCompatActivity() {
                     folloeing = following,
                     posts = posts,
                     pio = it.getString("pio").toString(),
+                    notfication = null,
+                    senderNotfication = sendernotficationsArrr
 
-                    )
+                )
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }.addOnFailureListener {
@@ -293,9 +319,9 @@ class SplachActivity : AppCompatActivity() {
 
         FirebaseFirestore.getInstance()
             .collection("story")
+            .orderBy("sendTime")
             .addSnapshotListener { value, error ->
-                Log.e("ASD", " ${value!!.size()} value")
-
+                storyes.clear()
                 for (i in value!!) {
                     var seensArr = ArrayList<String>()
                     FirebaseFirestore.getInstance()
@@ -303,8 +329,7 @@ class SplachActivity : AppCompatActivity() {
                         .document(i.id)
                         .collection("seenIds")
                         .get()
-                        .addOnSuccessListener { its
-                            ->
+                        .addOnSuccessListener { its ->
 
                             for (it in its) {
                                 seensArr.add(it.id)
@@ -325,11 +350,7 @@ class SplachActivity : AppCompatActivity() {
                     storyes.add(
                         story
                     )
-
-
                 }
-
-
             }
 
 

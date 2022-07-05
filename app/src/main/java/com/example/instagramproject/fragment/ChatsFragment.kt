@@ -26,7 +26,8 @@ class ChatsFragment : Fragment() {
     }
 
     var arrChatUsers = ArrayList<UserModel>()
-var adapter=AdapterChatsAdapter(arrChatUsers)
+    var adapter = AdapterChatsAdapter(arrChatUsers)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,21 +37,20 @@ var adapter=AdapterChatsAdapter(arrChatUsers)
 
         binding.recChats.adapter = adapter
 
-                binding.recChats.layoutManager =
+        binding.recChats.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        binding.userName.text = SplachActivity.currentUser!!.userName
-           Log.e("ASD",SplachActivity.uId.toString()+"SAD")
+        binding.userName.text = SplachActivity.currentUser?.userName ?: "ASD"
+
         return binding.root
     }
-
 
     fun getChats() {
         FirebaseFirestore.getInstance()
             .collection("users")
             .document(SplachActivity.uId)
             .collection("chats")
-            .addSnapshotListener { chatsItems, error   ->
+            .addSnapshotListener { chatsItems, error ->
                 arrChatUsers.clear()
                 for (i in chatsItems!!) {
                     Log.e("ASD", i.id.toString() + "ASDDSA")
@@ -72,12 +72,14 @@ var adapter=AdapterChatsAdapter(arrChatUsers)
                                 followers = null,
                                 folloeing = null,
                                 pio = usr.getString("pio").toString(),
+                                notfication = null,
+                                senderNotfication = null
                             )
-Log.e("ASD","Abod ayman "+user.userName)
-if (!arrChatUsers.contains(user)){
-    arrChatUsers.add(user)
+                            Log.e("ASD", "Abod ayman " + user.userName)
+                            if (!arrChatUsers.contains(user)) {
+                                arrChatUsers.add(user)
 
-}
+                            }
                             adapter.nty()
 
 

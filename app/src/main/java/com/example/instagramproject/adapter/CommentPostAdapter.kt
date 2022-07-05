@@ -73,10 +73,10 @@ class CommentPostAdapter(var postId: String, var arr: ArrayList<CommentModel>) :
             mlikeModel.isLike = IsMyLike
 
             var numberOfCommentsLike = 0
-            Log.e("ASD","${arr[position].commentLikes.size}")
+            Log.e("ASD", "${arr[position].commentLikes.size}")
             for (i in arr[position].commentLikes) {
                 if (i.isLike) {
-Log.e("ASD","${i.isLike}")
+                    Log.e("ASD", "${i.isLike}")
                     numberOfCommentsLike++
                 } else {
                     numberOfCommentsLike--
@@ -129,8 +129,7 @@ Log.e("ASD","${i.isLike}")
                     .addOnFailureListener {
                     }
 
-            }
-            else {
+            } else {
                 FirebaseFirestore
                     .getInstance()
                     .collection("posts")
@@ -155,7 +154,7 @@ Log.e("ASD","${i.isLike}")
             }
         }
 
-        IsMyLike=mlikeModel.isLike
+        IsMyLike = mlikeModel.isLike
         if (IsMyLike) {
             holder.binding.btnLikeComment.setImageResource(R.drawable.ic_baseline_favorite_24)
         } else {

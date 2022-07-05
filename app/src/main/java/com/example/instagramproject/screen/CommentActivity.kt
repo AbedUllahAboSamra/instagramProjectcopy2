@@ -15,6 +15,7 @@ import androidx.appcompat.widget.LinearLayoutCompat.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramproject.R
+import com.example.instagramproject.ScandryFragments.SubMainFragment.Companion.postsAdapter
 import com.example.instagramproject.adapter.CommentPostAdapter
 import com.example.instagramproject.databinding.ActivityCommentBinding
 import com.example.instagramproject.model.CommentModel
@@ -138,10 +139,6 @@ class CommentActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
     }
 
 
@@ -165,8 +162,6 @@ class CommentActivity : AppCompatActivity() {
                 // binding.layoutIfNoCommentAndPostContent.visibility = View.VISIBLE
 
 
-
-
                 var mapComment = HashMap<String, Any>()
                 mapComment["commentDate"] = ""
                 mapComment["commenterName"] = SplachActivity.currentUser!!.userName
@@ -182,10 +177,16 @@ class CommentActivity : AppCompatActivity() {
                     .collection("comments")
                     .add(commentModel)
                     .addOnFailureListener {
-                     }.addOnSuccessListener {
-                        commentModel.commentId=it.id
-                        postItem.comments?.add(commentModel)
+                    }.addOnSuccessListener {
+
+
+                        commentModel.commentId = it.id
                         checkItems_Visiblity()
+                        for (i in SplachActivity.postsArray) {
+                            if (i.postId == postId) {
+                                i.comments?.add(commentModel)
+                            }
+                        }
                     }
 
 
@@ -236,6 +237,8 @@ class CommentActivity : AppCompatActivity() {
 
 
     }
+
+
 
 
 }

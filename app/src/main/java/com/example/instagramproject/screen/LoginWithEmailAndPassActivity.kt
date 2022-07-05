@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramproject.databinding.ActivityLoginWithEmailAndPassBinding
 import com.example.instagramproject.model.CustomProgressDialog
 import com.example.instagramproject.model.FollowingModel
+import com.example.instagramproject.model.NotficationModle
 import com.example.instagramproject.model.UserModel
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -111,6 +112,7 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                     var following = ArrayList<FollowingModel>()
                     var followers = ArrayList<FollowingModel>()
                     var posts = ArrayList<String>()
+                    var sendernotficationsArrr = ArrayList<NotficationModle>()
 
 //get get  following following
                     FirebaseFirestore.getInstance().collection("users")
@@ -162,6 +164,27 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
 
                         }
 
+                    // sender notfications notfications notfications
+                    FirebaseFirestore.getInstance().collection("users")
+                        .document(it.user!!.uid)
+                        .collection("senderNotification")
+                        .get()
+                        .addOnSuccessListener { nofs ->
+
+                            for (i in nofs) {
+                                var notficationModle = NotficationModle(
+                                    id = i.id,
+                                    type = i.getString("type").toString(),
+                                    postId = i.getString("postId").toString(),
+                                    personName = i.getString("personName").toString(),
+                                    personId = i.getString("personId").toString(),
+                                    day = i.getString("day").toString(),
+                                    personImage = i.getString("personImage").toString(),
+                                    postImage = i.getString("postImage").toString(),
+                                )
+                                sendernotficationsArrr.add(notficationModle)
+                            }
+                        }
 
 
                     FirebaseFirestore.getInstance().collection("users")
@@ -180,6 +203,8 @@ class LoginWithEmailAndPassActivity : AppCompatActivity() {
                                 folloeing = following,
                                 followers = followers,
                                 posts = posts,
+                                notfication = null,
+                                senderNotfication = sendernotficationsArrr
 
                             )
 

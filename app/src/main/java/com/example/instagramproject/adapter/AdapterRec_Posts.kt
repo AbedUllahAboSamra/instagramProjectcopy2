@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramproject.R
 import com.example.instagramproject.databinding.DesignPostItemBinding
 import com.example.instagramproject.model.LikeModel
+import com.example.instagramproject.model.NotficationModle
 import com.example.instagramproject.model.PostModel
 import com.example.instagramproject.screen.CommentActivity
 import com.example.instagramproject.screen.PersonProfileActivity
@@ -18,6 +19,7 @@ import com.example.instagramproject.screen.SplachActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.NonDisposableHandle.parent
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -28,6 +30,7 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
     lateinit var adapter: adapterPagerFilesPick
 
     class myViewHoleder(var binding: DesignPostItemBinding) : RecyclerView.ViewHolder(binding.root)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHoleder {
 
@@ -43,6 +46,9 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
     override fun onBindViewHolder(holder: myViewHoleder, position: Int) {
         holder.binding.frame.setBackgroundResource(R.drawable.story_background_gradiant)
+        holder.binding.tabTablayoutWithViewPager.visibility = View.VISIBLE
+        holder.binding.pagerImages.clipToPadding = false
+        holder.binding.pagerImages.pageMargin = 10
         adapter.noty()
 
         Picasso.get().load(arr[position].posterImageUrl).into(holder.binding.userImageId)
@@ -55,11 +61,12 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
         var post = arr[position]
         var isLike = false
 
-        if (arr[position].posterId==SplachActivity.uId) {
+        // set story back ground seen
+        if (arr[position].posterId == SplachActivity.uId) {
             holder.binding.frame.background = null
         }
+        // set story back ground seen
         if (SplachActivity.storyes.size != 0) {
-
             SplachActivity.storyes.forEach { s ->
                 if (s.senderID == arr[position].posterId) {
                     holder.binding.frame.isSelected = s.seenIds.contains(SplachActivity.uId)
@@ -70,10 +77,17 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
         } else {
             holder.binding.frame.background = null
         }
+        //end  set story back ground seen
 
+        // set post Comment
         if (arr[position].comments!!.size > 0) {
-            holder.binding.tvViewNumOfComment.text =
-                "View all ${arr[position].comments!!.size} comments..."
+            if (arr[position].comments!!.size > 1) {
+                holder.binding.tvViewNumOfComment.text =
+                    "View ${arr[position].comments!!.size} comments..."
+            } else {
+                holder.binding.tvViewNumOfComment.text =
+                    "View all ${arr[position].comments!!.size} comments..."
+            }
         } else {
             holder.binding.tvViewNumOfComment.visibility = View.GONE
         }
@@ -93,9 +107,7 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
         }
 
-        holder.binding.tabTablayoutWithViewPager.visibility = View.VISIBLE
-        holder.binding.pagerImages.clipToPadding = false
-        holder.binding.pagerImages.pageMargin = 10
+
 
 
 
@@ -120,8 +132,86 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
             if (isLike) {
                 holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_24)
-            } else {
+                var map = HashMap<String, Any>()
+                map["type"] = "${SplachActivity.currentUser!!.userName} Like your Reel"
+                map["postId"] = arr[position].postId
+                map["personName"] = SplachActivity.currentUser!!.userName
+                map["personId"] = SplachActivity.uId
+                map["personImage"] = SplachActivity.currentUser!!.imageUrl!!
+                map["day"] =
+                    SimpleDateFormat("yyyy.MM.dd 'at' h:mm a", Locale.getDefault()).format(Date())
+
+
+
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(arr[position].posterId)
+                    .collection("notification")
+                    .add(map)
+                    .addOnSuccessListener { it ->
+
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("senderNotification")
+                            .document(it.id)
+                            .set(map).addOnSuccessListener { aaa ->
+                                var map = HashMap<String, Any>()
+                                map["type"] =
+                                    "${SplachActivity.currentUser!!.userName} Like your Reel"
+                                map["postId"] = arr[position].postId
+                                map["personName"] = SplachActivity.currentUser!!.userName
+                                map["personId"] = SplachActivity.uId
+                                map["personImage"] = SplachActivity.currentUser!!.imageUrl!!
+                                map["day"] =
+                                    SimpleDateFormat(
+                                        "yyyy.MM.dd 'at' h:mm a",
+                                        Locale.getDefault()
+                                    ).format(Date())
+
+                                var notf = NotficationModle(
+                                    id = it.id,
+                                    type = "${SplachActivity.currentUser!!.userName} Like your Reel",
+                                    postId = arr[position].postId,
+                                    personName = SplachActivity.currentUser!!.userName,
+                                    personId = SplachActivity.uId,
+                                    personImage = SplachActivity.currentUser!!.imageUrl!!,
+                                    day = SimpleDateFormat(
+                                        "yyyy.MM.dd 'at' h:mm a",
+                                        Locale.getDefault()
+                                    ).format(Date()),
+                                    postImage = arr[position].postImagesUrl.toString()
+                                )
+
+                                SplachActivity.currentUser!!.senderNotfication?.add(
+                                    notf
+                                )
+
+                            }
+                    }
+
+
+            }
+            else {
                 holder.binding.btnLike.setImageResource(R.drawable.ic_outline_favorite_border_24)
+                for (i in SplachActivity.currentUser!!.senderNotfication!!)
+                    if (i.postId == arr[position].postId) {
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(arr[position].posterId)
+                            .collection("notification")
+                            .document(i.id)
+                            .delete()
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("senderNotification")
+                            .document(i.id)
+                            .delete()
+                            .addOnSuccessListener {
+                                SplachActivity.currentUser!!.senderNotfication!!.remove(i)
+                            }
+                    }
+
 
             }
 
@@ -199,10 +289,14 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
             i.putExtra("postId", post.postId)
             context.startActivity(i)
         }
+        holder.binding.tvViewNumOfComment.setOnClickListener { _ ->
+            var i = Intent(context, CommentActivity::class.java)
+            i.putExtra("postId", post.postId)
+            context.startActivity(i)
+        }
 
 
         //text align
-
 
         var space = ""
         for (i in 0..(arr[position].posterName.length)) {
@@ -215,19 +309,15 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
 
 
         holder.binding.btnClickToOpenPersonProfile.setOnClickListener {
-            Log
-                .e("ASD", "Clicked")
+
             if (post.posterId == SplachActivity.uId) {
-                Log.e("ASD", "Clickedtrue")
             } else {
-                Log.e("ASD", "Clickedfalse")
                 var i = Intent(context, PersonProfileActivity::class.java)
                 i.putExtra("personId", post.posterId)
                 i.putExtra("image", post.posterImageUrl)
                 i.putExtra("name", post.posterName)
                 context.startActivity(i)
             }
-
         }
 
     }
@@ -235,6 +325,4 @@ class AdapterRec_Posts(var context: Context, var arr: ArrayList<PostModel>) :
     override fun getItemCount(): Int {
         return arr.size
     }
-
-
 }

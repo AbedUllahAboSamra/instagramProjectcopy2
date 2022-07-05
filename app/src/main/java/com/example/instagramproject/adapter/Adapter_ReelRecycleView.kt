@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramproject.R
 import com.example.instagramproject.databinding.DesignReelItemBinding
 import com.example.instagramproject.model.LikeModel
+import com.example.instagramproject.model.NotficationModle
 import com.example.instagramproject.model.PostModel
 import com.example.instagramproject.screen.CommentActivity
 import com.example.instagramproject.screen.SplachActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -50,7 +52,6 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
         }
         holder.binding.ReelVedio.setOnCompletionListener { mo ->
             mo.start()
-
         }
 
         var isLike = false
@@ -71,7 +72,7 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
                     if (i.isLike) {
                         holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_24)
                     } else {
-                        holder.binding.btnLike.setImageResource(R.drawable.ic_outline_favorite_border_24)
+                        holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24)
 
                     }
                 }
@@ -88,8 +89,87 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
 
             if (isLike) {
                 holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_24)
-            } else {
-                holder.binding.btnLike.setImageResource(R.drawable.ic_outline_favorite_border_24)
+                var map = HashMap<String, Any>()
+                map["type"] = "${SplachActivity.currentUser!!.userName} Like your Reel"
+                map["postId"] = arr[position].postId
+                map["personName"] = SplachActivity.currentUser!!.userName
+                map["personId"] = SplachActivity.uId
+                map["personImage"] = SplachActivity.currentUser!!.imageUrl!!
+                map["day"] =
+                    SimpleDateFormat("yyyy.MM.dd 'at' h:mm a", Locale.getDefault()).format(Date())
+
+
+
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(arr[position].posterId)
+                    .collection("notification")
+                    .add(map)
+                    .addOnSuccessListener { it ->
+
+                        FirebaseFirestore.getInstance().collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("senderNotification")
+                            .document(it.id)
+                            .set(map).addOnSuccessListener { aaa ->
+                                var map = HashMap<String, Any>()
+                                map["type"] =
+                                    "${SplachActivity.currentUser!!.userName} Like your Reel"
+                                map["postId"] = arr[position].postId
+                                map["personName"] = SplachActivity.currentUser!!.userName
+                                map["personId"] = SplachActivity.uId
+                                map["personImage"] = SplachActivity.currentUser!!.imageUrl!!
+                                map["day"] =
+                                    SimpleDateFormat(
+                                        "yyyy.MM.dd 'at' h:mm a",
+                                        Locale.getDefault()
+                                    ).format(Date())
+
+                                var notf = NotficationModle(
+                                    id = it.id,
+                                    type = "${SplachActivity.currentUser!!.userName} Like your Reel",
+                                    postId = arr[position].postId,
+                                    personName = SplachActivity.currentUser!!.userName,
+                                    personId = SplachActivity.uId,
+                                    personImage = SplachActivity.currentUser!!.imageUrl!!,
+                                    day = SimpleDateFormat(
+                                        "yyyy.MM.dd 'at' h:mm a",
+                                        Locale.getDefault()
+                                    ).format(Date()),
+                                    postImage = arr[position].postImagesUrl.toString()
+
+                                )
+
+                                SplachActivity.currentUser!!.senderNotfication?.add(
+                                    notf
+                                )
+
+                            }
+                    }
+
+
+            }
+            else {
+                holder.binding.btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                for (i in SplachActivity.currentUser!!.senderNotfication!!)
+                    if (i.postId == arr[position].postId) {
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(arr[position].posterId)
+                            .collection("notification")
+                            .document(i.id)
+                            .delete()
+                        FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(SplachActivity.uId)
+                            .collection("senderNotification")
+                            .document(i.id)
+                            .delete()
+                            .addOnSuccessListener {
+                                SplachActivity.currentUser!!.senderNotfication!!.remove(i)
+                            }
+                    }
+
 
             }
 
@@ -119,7 +199,8 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
                             .document(i.id)
                             .set(mapLike)
                             .addOnSuccessListener {
-                                Log.e("ASD", "update like  ")
+
+
                             }.addOnFailureListener {
 
                             }
@@ -134,6 +215,7 @@ class Adapter_ReelRecycleView(var arr: ArrayList<PostModel>) :
                             .add(mapLike)
                             .addOnSuccessListener { it ->
                                 arr[position].likes!!.add(likeModle)
+
 
                             }.addOnFailureListener {
 

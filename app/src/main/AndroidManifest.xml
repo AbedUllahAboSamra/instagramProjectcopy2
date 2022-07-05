@@ -118,6 +118,15 @@
                     tools:ignore="ManifestResource" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".Service.FireBaseMassagingServices"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
         <activity
             android:name=".screen.LoginActivity"
             android:exported="true" />

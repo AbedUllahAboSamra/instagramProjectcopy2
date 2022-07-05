@@ -16,6 +16,7 @@ import com.example.instagramproject.model.userStoryModle
 import com.example.instagramproject.screen.MainActivity
 import com.example.instagramproject.screen.ShowStoryActivity
 import com.example.instagramproject.screen.SplachActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
 // show activity adaoter

@@ -130,6 +130,9 @@ class MassagesChatActivity : AppCompatActivity() {
                     folloeing = following,
                     posts = posts,
                     pio = it.getString("pio").toString(),
+                    notfication = null,
+                    senderNotfication = null
+
                 )
                 binding.tvAccountName.text = user.accountName
             }.addOnFailureListener {

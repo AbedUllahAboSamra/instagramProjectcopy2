@@ -251,6 +251,8 @@ class SignUp2Activity : AppCompatActivity() {
                                     folloeing = null,
                                     posts = null,
                                     pio = "",
+                                    notfication = null,
+                                    senderNotfication = null
 
                                     )
 

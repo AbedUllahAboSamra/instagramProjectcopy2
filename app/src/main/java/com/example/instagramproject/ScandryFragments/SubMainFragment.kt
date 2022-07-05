@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramproject.R
 import com.example.instagramproject.adapter.AdapterRec_Posts
 import com.example.instagramproject.adapter.AdapterRec_Story
-import com.example.instagramproject.adapter.adapterPagerFilesPick
 import com.example.instagramproject.databinding.FragmentSubMainBinding
-import com.example.instagramproject.model.UserModel
 import com.example.instagramproject.model.userStoryModle
 import com.example.instagramproject.screen.FirstCreatePostActivity
 import com.example.instagramproject.screen.MainActivity
@@ -25,7 +23,8 @@ class SubMainFragment : Fragment() {
 
     companion object {
         var users = ArrayList<userStoryModle>()
-
+        lateinit var postsAdapter: AdapterRec_Posts
+      lateinit var  storyAdapter : AdapterRec_Story
     }
 
     override fun onCreateView(
@@ -57,12 +56,12 @@ class SubMainFragment : Fragment() {
         // story Recycle view Adapter
         binding.recStoryItems.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        var storyAdapter = AdapterRec_Story(requireContext(), users)
+       storyAdapter = AdapterRec_Story(requireContext(), users)
         binding.recStoryItems.adapter = storyAdapter
 
         // posts Recycle view Adapter
 
-        var postsAdapter = AdapterRec_Posts(requireContext(), SplachActivity.postsArray)
+        postsAdapter = AdapterRec_Posts(requireContext(), SplachActivity.postsArray)
         var layManeger = LinearLayoutManager(requireContext())
         binding.recPosts.layoutManager = layManeger
         binding.recPosts.adapter = postsAdapter
@@ -133,5 +132,4 @@ class SubMainFragment : Fragment() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return super.onContextItemSelected(item)
     }
-
 }

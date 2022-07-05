@@ -16,6 +16,10 @@ import com.example.instagramproject.model.UserModel
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class PersonProfileActivity : AppCompatActivity() {
 
@@ -150,6 +154,8 @@ class PersonProfileActivity : AppCompatActivity() {
                     folloeing = following,
                     posts = posts,
                     pio = it.getString("pio").toString(),
+                    notfication = null,
+                    senderNotfication = null,
                 )
 
                 var followersNum = 0
@@ -335,7 +341,13 @@ class PersonProfileActivity : AppCompatActivity() {
                         doocumentCurrentUserFollowersId = ist.id
                         var smap = HashMap<String, Any>()
                         smap["userId"] = id
-                        smap["followDate"] = ""
+                        smap["followDate"] =  SimpleDateFormat(
+                            "yyyy.MM.dd 'at' h:mm a",
+                            Locale.getDefault()
+                        ).format(
+                            Date()
+                        ).toString()
+
                         smap["isFollow"] = isIamFollow
                         FirebaseFirestore
                             .getInstance()
@@ -345,18 +357,10 @@ class PersonProfileActivity : AppCompatActivity() {
                             .add(map)
                             .addOnSuccessListener { it ->
                                 doocumentCurrentUserFollowingId = it.id
-
-                                Log.e("ASD", "here" + doocumentCurrentUserFollowersId)
-                                Log.e("ASD", "me" + doocumentCurrentUserFollowingId)
                             }
                     }.addOnSuccessListener {
-
                     }
-
-
             }
-
-
         }
         binding.btnMassage.setOnClickListener {
             var intent = Intent(this, MassagesChatActivity::class.java)
@@ -366,7 +370,4 @@ class PersonProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 }
-

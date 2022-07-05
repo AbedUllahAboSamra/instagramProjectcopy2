@@ -11,6 +11,8 @@ class UserModel(
     var followers: ArrayList<FollowingModel>?,
     var folloeing: ArrayList<FollowingModel>?,
     var pio: String,
+    var notfication: ArrayList<NotficationModle>?,
+    var senderNotfication :ArrayList<NotficationModle>?
 
 
-    )
+)

@@ -1,5 +1,8 @@
 package com.example.instagramproject.fragment
 
+import android.app.Notification
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
@@ -10,6 +13,8 @@ import androidx.fragment.app.Fragment
 import com.example.instagramproject.R
 import com.example.instagramproject.ScandryFragments.*
 import com.example.instagramproject.databinding.FragmentMainBinding
+import com.example.instagramproject.editorStory.PhotoApp
+import com.example.instagramproject.screen.MainActivity
 import com.google.android.material.tabs.TabLayout
 
 
@@ -119,8 +124,6 @@ class MainFragment : Fragment() {
                             }
                             Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
                         }
-
-
                     }
                     4 -> {
                         requireActivity().supportFragmentManager.beginTransaction()

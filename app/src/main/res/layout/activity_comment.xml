@@ -401,7 +401,8 @@
                                 android:layout_weight="1"
                                 android:clickable="true"
                                 android:focusable="true"
-                                app:cardBackgroundColor="#00000000"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@null"
                                 app:rippleColor="?attr/colorOnPrimary">
 
                                 <TextView

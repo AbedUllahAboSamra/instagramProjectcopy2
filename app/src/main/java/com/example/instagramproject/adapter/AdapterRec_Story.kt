@@ -15,6 +15,7 @@ import com.example.instagramproject.model.userStoryModle
 import com.example.instagramproject.screen.AddStoryActivity
 import com.example.instagramproject.screen.ShowStoryActivity
 import com.example.instagramproject.screen.SplachActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -22,6 +23,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class AdapterRec_Story(var context: Context, var arr: ArrayList<userStoryModle>) :
     RecyclerView.Adapter<AdapterRec_Story.myViewHolder>() {
@@ -37,6 +39,7 @@ class AdapterRec_Story(var context: Context, var arr: ArrayList<userStoryModle>)
         holder.binding.btnAddStory.visibility = View.GONE
         holder.binding.frame.isSelected = false
 
+
         if (position == 0) {
             SplachActivity.storyes.forEach { s ->
                 if (s.senderID == SplachActivity.uId) {
@@ -48,8 +51,8 @@ class AdapterRec_Story(var context: Context, var arr: ArrayList<userStoryModle>)
         val format = DateTimeFormatter.ofPattern("yyyy.MM.dd 'at' h:mm a")
 
         if (SplachActivity.storyes.size != 0) {
-            if (position != 0) {
 
+            if (position != 0) {
                 SplachActivity.storyes.forEach { s ->
                     if (s.senderID == arr[position - 1].id) {
                         holder.binding.frame.isSelected = s.seenIds.contains(SplachActivity.uId)
@@ -59,16 +62,12 @@ class AdapterRec_Story(var context: Context, var arr: ArrayList<userStoryModle>)
         }
 
         if (position == 0) {
-
             holder.binding.btnAddStory.visibility = View.VISIBLE
             Picasso.get().load(SplachActivity.currentUser!!.imageUrl)
                 .into(holder.binding.userImageId)
-
         } else {
-
             Picasso.get().load(arr[position - 1].imageUrl)
                 .into(holder.binding.userImageId)
-
         }
 
         holder.binding.root.setOnClickListener {
@@ -118,4 +117,7 @@ class AdapterRec_Story(var context: Context, var arr: ArrayList<userStoryModle>)
     override fun getItemCount(): Int {
         return arr.size + 1
     }
-}
+    fun  notfiy(){
+    notifyDataSetChanged()
+    }
+    }
